@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -48,7 +49,7 @@ class Sujet
      *
      * @ORM\Column(name="accepter", type="integer", nullable=false)
      */
-    private $accepter;
+    private $accepter='1';
 
     /**
      * @var int
@@ -64,15 +65,18 @@ class Sujet
      */
     private $id;
 
+
+    
     /**
      * @var int
      *
-     * @ORM\Column(name="idtopic", type="integer", nullable=false)
+     *@ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="sujet")
+     *@ORM\JoinColumn(name="idtopic", referencedColumnName="idtopic")
      */
     private $idtopic;
 
     /**
-     * @var string
+     * @var blob|null
      *
      * @ORM\Column(name="photo", type="blob", length=0, nullable=false)
      */
@@ -117,6 +121,10 @@ class Sujet
         $this->date = $date;
 
         return $this;
+    }
+    public function __construct()
+    {
+        $this->date = new DateTime('now');
     }
 
     public function getAccepter(): ?int

@@ -385,53 +385,98 @@
       <div class="row">
         <div class="col-lg-6">
 
-        
 
           <div class="card">
             <div class="card-body">
-            <div>
-
-              <h5 class="card-title">Table des topics</h5>
-                    <button type="button" class="btn btn-warning">+</button>
-            </div>        
-              <!-- sujet Table -->
-             
-             <div>
-             {% block body %}
-             <table class="table" >
-                <tr>
-                    {#<th scope="col">id</th>#}
+              <h5 class="card-title">Table des sujets</h5>
+           
+              <!-- Active Table -->
+              <table class="table">
+               
+                  <tr>
                     <th scope="col">titre</th>
                     <th scope="col">contenu</th>
                     <th scope="col">date</th>
-                    <th scope="col">nb_sjt</th>
-                    
+                    <th scope="col">nb_com</th>
+                    <th scope="col">photo</th>
                     <th scope="col">Actions</th>
                   </tr>
-                {% for topic in topics %}
+                  {% for sujet in sujets %}
                 <tr> 
                {# <td> {{sujet.idsujet}}</td>#}
-                <td> <a href="{{ path('listpost',{'id': topic.idtopic})}}"> {{topic.titretopic}}</td>
-                <td> {{topic.description}}</td>
-                <td> {{topic.date.format("d/m/Y")}}</td>
-                <td> {{topic.nbsujet}}</td>
-                {# <td>  <a href="{{ path('updateTopic',{'id': topic.idtopic})}}"> update </a> </td>#}
-                <td>  <a href="{{ path('DeleteTopic',{'id': topic.idtopic})}}"> Delete </a> </td>
-                {#<td> <a href="{{ path('/post',{'id': sujet.idsujet})}}"> {{sujet.titresujet}} </a> </td>
+                <td> <a href="{{ path('listcom',{'id': sujet.idsujet})}}"> {{sujet.titresujet}}</td>
+                <td> {{sujet.contenu}}</td>
+                <td> {{sujet.date.format("d/m/Y")}}</td>
+                <td> {{sujet.nbcom}}</td>
+                {#<td> <img src="{{ asset(sujet -> getPhoto()) }}"></img></td>
+                <td><img src="data:image/jpg;base64,<?=$ton_base_64;?>"/></td>#}
+                <td><button><img src="{{ asset('image/' ~ sujet.photo) }}"></button></td>
+                
+                {# <td>  <a href="{{ path('DeleteSujet',{'id': sujet.idsujet})}}"> Delete </a> </td>
+                <td> <a href="{{ path('/post',{'id': sujet.idsujet})}}"> {{sujet.titresujet}} </a> </td>
                
                 <td>  <a href="{{ path('updateClassroom',{'id': post.id})}}"> update </a> </td>#}
 
                 <tr>
                 {% endfor %}
-                </table>
-                {% endblock %}
-             </div>
-             
-             
-             
-              <!-- End sujet Table  -->
+              </table>
+              <!-- End Active Table -->
+              
+
             </div>
           </div>
+        
+{#
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Table des commentaires</h5>
+           
+              <!-- Active Table -->
+              <table class="table">
+               
+                  <tr>
+                    <th scope="col">contenu</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Nb j'aime</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                  {% for commentaire in commentaires %}
+                
+                
+                  <tr>
+                   <td>{{commentaire.idcom}}</td>
+                    <td>{{commentaire.contenu}}</td>
+                    <td>{{commentaire.date.format("d/m/y")}}</td>
+                    <td>{{commentaire.nblike}}</td>
+                    
+                  </tr>
+                 {% endfor %}
+              </table>
+              <!-- End Active Table -->
+              
+
+            </div>
+          </div>#}
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

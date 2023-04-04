@@ -5,9 +5,10 @@ namespace App\Controller\BackendController;
 use App\Entity\Sujet;
 use App\Entity\Topic;
 use App\Entity\Commentaire;
+use App\Form\SujetType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -90,18 +91,18 @@ class PostController extends AbstractController
 
     /************************* Affichage Sujet **************************************/
 
-    #[Route('/post', name: 'listpost')]
+    #[Route('/post/sujet', name: 'listpost')]
     public function listpost(ManagerRegistry $doctrine): Response
     {
         $Sujetrepository=$doctrine->getRepository(Sujet::class);
         $sujets=$Sujetrepository->findAll();
-        return $this->render('post/components-post.html.twig', [
+        return $this->render('post/afficherPost.html.twig', [
             'sujets' => $sujets,
         ]);
     }
     /************************* Suppression Sujet**************************************/
 
-    #[Route('/post', name: 'DeleteSujet')]
+ /*   #[Route('/post', name: 'DeleteSujet')]
     public function deleteSujet($idsujet, ManagerRegistry $doctrine): Response
     {
         //Trouver le bon Classroom
@@ -114,7 +115,7 @@ class PostController extends AbstractController
 
         return $this->redirectToRoute('listpost');
     }
-
+*/
     /************************* Affichage topic **************************************/
 
     #[Route('/post', name: 'listtopic')]
@@ -127,7 +128,7 @@ class PostController extends AbstractController
         ]);
     }
 
-
+ /************************* Suppression topic **************************************/
     #[Route('/post', name: 'DeleteTopic')]
     public function deleteTopic($idtopic, ManagerRegistry $doctrine): Response
     {
@@ -142,33 +143,55 @@ class PostController extends AbstractController
         return $this->redirectToRoute('listtopic');
     }
 
+    /** ********************************* update topic ********************************/
+    #[Route('/updatetopic/{idtopic}', name: 'updateTopic')]
+    public function updateTopic(Request $request,ManagerRegistry $doctrine,Topic $topic)
+    {
+        
+        $form=$this->createForm(TopicType::class, $topic);
+        $form->add('update',SubmitType::class);
+        $form->handleRequest($request);
+ 
+        if ($form->isSubmitted()) {
+        $em= $doctrine->getManager();
+        $entityManager =$doctrine->getManager();
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('listtopic',['idtopic' =>$topic->getIdtopic()]);
+        }
+        return $this->render('post/updateTopic.html.twig', [
+            'form'=> $form->createView(),
+        ]);
+    }
+
     /************************* Affichage commentaire **************************************/
 
-    #[Route('/post', name: 'listcom')]
+    #[Route('/post/sujet/commentaire', name: 'listcom')]
     public function listCommentaire(ManagerRegistry $doctrine): Response
     {
         $Commentairerepository=$doctrine->getRepository(Commentaire::class);
         $commentaires=$Commentairerepository->findAll();
-        return $this->render('post/components-post.html.twig', [
+        return $this->render('post/afficherCom.html.twig', [
             'commentaires' => $commentaires,
         ]);
     }
   /************************* Ajout post **************************************/
     #[Route('/post/add', name: 'addPost')]
-    public function addSujet(ManagerRegistry $doctrine, Request $request): Response
+    public function ajout(ManagerRegistry $doctrine, Request $request): Response
     {
         $sujet= new Sujet;
         $form=$this->createForm(SujetType::class, $sujet);
         $form->handleRequest($request);
- 
+    
         if ($form->isSubmitted()) {
         $em= $doctrine->getManager();
         $em->persist($sujet);
         $em->flush();
-        return $this->redirectToRoute('listpost');
+        return $this->redirectToRoute('addPost');
         }
         return $this->render('post/addSujet.html.twig', [
             'formSujet'=> $form->createView(),
         ]);
-    }
+    
+        }
 }

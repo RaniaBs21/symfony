@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commentaire
  *
- * @ORM\Table(name="commentaire", indexes={@ORM\Index(name="fk_idusercom", columns={"id"}), @ORM\Index(name="fk_idsujet", columns={"idsujet"})})
+ * @ORM\Table(name="commentaire", indexes={@ORM\Index(name="fk_idsujet", columns={"idsujet"}), @ORM\Index(name="fk_idusercom", columns={"id"})})
  * @ORM\Entity
  */
 class Commentaire
@@ -46,7 +46,8 @@ class Commentaire
     /**
      * @var int|null
      *
-     * @ORM\Column(name="idsujet", type="integer", nullable=true)
+     *@ORM\ManyToOne(targetEntity="App\Entity\Sujet", inversedBy="Commentaire")
+     *@ORM\JoinColumn(name="idsujet", referencedColumnName="idsujet")
      */
     private $idsujet;
 

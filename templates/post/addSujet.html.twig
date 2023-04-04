@@ -1,4 +1,39 @@
-{{form_start(formSujet)}}
-    {{form_label(formSujet.titresujet,"Nom du classroom")}}
-    {{form_widget(formSujet.titresujet)}}
-{{form_end(formSujet)}}
+<div class="card-body">
+              <h5 class="card-title">Ajout post</h5>
+
+              <!-- General Form Elements -->
+            {{ form_start(formSujet) }}
+    <div class="row mb-5">
+        {{ form_label(formSujet.titresujet, 'Titre', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formSujet.titresujet, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="row mb-5">
+        {{ form_label(formSujet.contenu, 'Contenu', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formSujet.contenu, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="row mb-3">
+        {{ form_label(formSujet.photo, null, {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formSujet.photo, {'attr': {'class': 'form-control', 'type': 'file', 'id': 'formFile'}}) }}
+        </div>
+    </div>
+   <div class="row mb-3">
+        {{ form_label(formSujet.idtopic, 'idtopic', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formSujet.idtopic, {'attr': {'class': 'form-select', 'aria-label': 'Default select example'}}) }}
+        </div>
+    </div>
+
+</div>
+
+    <div class="row mb-3">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-success">Ajouter</button>
+        </div>
+    </div>
+{{ form_end(formSujet) }}
