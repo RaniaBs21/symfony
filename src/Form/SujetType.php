@@ -26,10 +26,11 @@ class SujetType extends AbstractType
             ->add('contenu')
            
 
-          /*  ->add('date', DateType::class, [
+            /*->add('date', DateType::class, [
                 'widget' => 'choice',
             ])*/
-            /*->add('accepter', ChoiceType::class, [
+
+           /* ->add('accepter', ChoiceType::class, [
                 'choices' =>[
                     'Option 0' => 0,
                     'Option 1' => 1,
@@ -39,12 +40,13 @@ class SujetType extends AbstractType
                     return $index;
                 },
             ])*/
-            ->add('idtopic',EntityType::class ,[
+
+           /* ->add('idtopic',EntityType::class ,[
                 'class'=> Topic::class,
                 'choice_label'=>'idtopic',
                 'multiple'=>false,
                 'expanded'=> false,
-            ])
+            ])*/
 
             ->add('photo', FileType::class, [
                 'label' => 'Choisir une image',

@@ -6,6 +6,7 @@ use App\Entity\Sujet;
 use App\Entity\Topic;
 use App\Entity\Commentaire;
 use App\Form\SujetType;
+use App\Form\TopicType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -176,7 +177,7 @@ class PostController extends AbstractController
         ]);
     }
   /************************* Ajout post **************************************/
-    #[Route('/post/add', name: 'addPost')]
+    #[Route('/post/sujet/add', name: 'addPost')]
     public function ajout(ManagerRegistry $doctrine, Request $request): Response
     {
         $sujet= new Sujet;
@@ -191,6 +192,26 @@ class PostController extends AbstractController
         }
         return $this->render('post/addSujet.html.twig', [
             'formSujet'=> $form->createView(),
+        ]);
+    
+        }
+
+          /************************* Ajout Topic **************************************/
+    #[Route('/post/add', name: 'addTopic')]
+    public function addTopic(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $topic= new Topic;
+        $form=$this->createForm(TopicType::class, $topic);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted()) {
+        $em= $doctrine->getManager();
+        $em->persist($topic);
+        $em->flush();
+        return $this->redirectToRoute('addTopic');
+        }
+        return $this->render('post/addTopic.html.twig', [
+            'formTopic'=> $form->createView(),
         ]);
     
         }
