@@ -1,0 +1,50 @@
+{% block body %}
+    <h1 class="text-center mb-5">Modifier le quiz "{{ quiz.titre }}"</h1>
+    <section class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Quiz</h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Question</th>
+                                    <th scope="col">Option 1</th>
+                                    <th scope="col">Option 2</th>
+                                    <th scope="col">Option 3</th>
+                                    <th scope="col">Option 4</th>
+                                    <th scope="col">Réponse correcte</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                                {% for quiz in quiz %}
+                                    <tr>
+                                        <td>{{ quiz.titre }}</td>
+                                        <td>{{ quiz.question }}</td>
+                                        <td>{{ quiz.option1 }}</td>
+                                        <td>{{ quiz.option2 }}</td>
+                                        <td>{{ quiz.option3 }}</td>
+                                        <td>{{ quiz.option4 }}</td>
+                                        <td>{{ quiz.reponseCorrecte }}</td>
+                                        <td class="text-center">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-edit"></i> Modifier
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

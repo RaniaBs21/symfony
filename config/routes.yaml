@@ -1,3 +1,6 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+get_quiz_details:
+  path: '/quiz/{id}/details'
+  controller: App\Controller\QuizController::getDetails

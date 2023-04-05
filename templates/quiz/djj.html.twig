@@ -1,0 +1,56 @@
+<div class="card-body">
+    <h5 class="card-title">Ajout cours</h5>
+
+    <!-- General Form Elements -->
+    {{ form_start(formCours) }}
+    <div class="row mb-5">
+        {{ form_label(formCours.titreC, 'Titre', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formCours.titreC, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        {{ form_label(formCours.SousCategorie, 'Sous_categorie', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formCours.SousCategorie, {'attr': {'class': 'form-select', 'aria-label': 'Default select example'}}) }}
+        </div>
+    </div>
+
+
+    <div class="row mb-3">
+        {{ form_label(formCours.niveauC, 'Level', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formCours.niveauC, {'attr': {'class': 'form-select', 'aria-label': 'Default select example'}}) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        {{ form_label(formCours.fichierC, null, {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formCours.fichierC, {'attr': {'class': 'form-control', 'type': 'file', 'id': 'formFile'}}) }}
+        </div>
+    </div>
+
+
+    <div class="row mb-3">
+        {{ form_label(formCours.descriptionC, 'Description', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formCours.descriptionC, {'attr': {'class': 'form-control', 'style': 'height: 100px'}}) }}
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        {{ form_label(formCours.prix, 'Prix', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formCours.prix, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-success">Ajouter</button>
+        </div>
+    </div>
+{{ form_end(formCours) }}

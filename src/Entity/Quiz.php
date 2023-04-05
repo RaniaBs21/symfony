@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Quiz
+ * quiz
  *
- * @ORM\Table(name="quiz", indexes={@ORM\Index(name="iduser", columns={"id"})})
+ * @ORM\Table(name="quiz")
  * @ORM\Entity
  */
 class Quiz
@@ -17,7 +19,7 @@ class Quiz
      *
      * @ORM\Column(name="id_quiz", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
      */
     private $idQuiz;
 
@@ -25,6 +27,7 @@ class Quiz
      * @var string
      *
      * @ORM\Column(name="titre", type="string", length=100, nullable=false)
+    #[Assert\NotBlank(message:"Le titre est obligatoire")]
      */
     private $titre;
 
@@ -32,6 +35,7 @@ class Quiz
      * @var string
      *
      * @ORM\Column(name="option1", type="string", length=100, nullable=false)
+    #[Assert\NotBlank(message:"Choisissez une option")]
      */
     private $option1;
 
@@ -39,6 +43,7 @@ class Quiz
      * @var string
      *
      * @ORM\Column(name="option2", type="string", length=100, nullable=false)
+    #[Assert\NotBlank(message:"Choisissez une option")]
      */
     private $option2;
 
@@ -46,6 +51,7 @@ class Quiz
      * @var string
      *
      * @ORM\Column(name="option3", type="string", length=100, nullable=false)
+    #[Assert\NotBlank(message:"Choisissez une option")]
      */
     private $option3;
 
@@ -53,6 +59,7 @@ class Quiz
      * @var string
      *
      * @ORM\Column(name="option4", type="string", length=100, nullable=false)
+    #[Assert\NotBlank(message:"Choisissez une option")]
      */
     private $option4;
 
@@ -60,6 +67,7 @@ class Quiz
      * @var string
      *
      * @ORM\Column(name="question", type="string", length=100, nullable=false)
+    #[Assert\NotBlank(message:"Entrer une question")]
      */
     private $question;
 
@@ -67,18 +75,18 @@ class Quiz
      * @var string
      *
      * @ORM\Column(name="reponse_correcte", type="string", length=100, nullable=false)
+    #[Assert\NotBlank(message:"Entrer la reponse correcte ")]
      */
     private $reponseCorrecte;
 
     /**
-     * @var \Admin
-     *
-     * @ORM\ManyToOne(targetEntity="Admin")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Admin", inversedBy="quiz")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id", referencedColumnName="id")
      * })
+
      */
-    private $id;
+    private $admin;
 
     public function getIdQuiz(): ?int
     {
@@ -162,6 +170,7 @@ class Quiz
         return $this->reponseCorrecte;
     }
 
+
     public function setReponseCorrecte(string $reponseCorrecte): self
     {
         $this->reponseCorrecte = $reponseCorrecte;
@@ -180,6 +189,27 @@ class Quiz
 
         return $this;
     }
+    public function getQuiz(): ?string
+    {
+        return $this->quiz;
+    }
 
+    public function setQuiz(string $quiz): self
+    {
+        $this->quiz = $quiz;
+
+        return $this;
+    }
+    public function getAdmin(): ?Admin
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(?Admin $admin): self
+    {
+        $this->admin = $admin;
+
+        return $this;
+    }
 
 }
