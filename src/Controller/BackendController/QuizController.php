@@ -26,6 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class QuizController extends AbstractController
 {
+
     #[Route('/post', name: 'post')]
     public function post(): Response
     {
@@ -74,7 +75,7 @@ class QuizController extends AbstractController
         ]);
     }
     #[Route('/quiz', name: 'quiz')]
-    public function quiz(): Response
+    public function index(): Response
     {
         return $this->render('quiz/components-quiz.html.twig', [
             'QuizController' => 'QuizController',
@@ -91,16 +92,16 @@ class QuizController extends AbstractController
     }
 
     #[Route('/new', name: 'ajoutquiz')]
-    public function new(Request $request): Response
+    public function new(Request $request ,ManagerRegistry $doctrine ): Response
     {
         $quiz = new Quiz();
         $form = $this->createForm(QuizType::class, $quiz);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($quiz);
-            $entityManager->flush();
+            $em =$doctrine->getManager();
+            $em->persist($quiz);
+            $em->flush();
 
             return $this->redirectToRoute('read_Quiz');
         }
@@ -144,18 +145,15 @@ class QuizController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('read_Quiz');
     }
-
-
-
     public function getDetails(Request $request)
     {
         $idQuiz = $request->request->get('idQuiz');
         $quiz = $this->getDoctrine()->getRepository(Quiz::class)->find($idQuiz);
 
-        $quizDetails = [
+        $quizDetails= [
             'idQuiz' => $quiz->getIdQuiz(),
             'titre' => $quiz->getTitre(),
-            'question' => $quiz->getQuestion(),
+            'question'=> $quiz->getQuestion(),
             'option1' => $quiz->getOption1(),
             'option2' => $quiz->getOption2(),
             'option3' => $quiz->getOption3(),

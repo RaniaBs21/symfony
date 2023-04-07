@@ -225,7 +225,7 @@ section {
 --------------------------------------------------------------*/
 @media screen and (max-width: 768px) {
   [data-aos-delay] {
-    transition-delay: 0 !important;
+    transition-delay: 0ms !important;
   }
 }
 
@@ -1623,6 +1623,9 @@ section {
 
 .blog .blog-details .meta-top {
   margin-top: 20px;
+}
+
+.blog .blog-details .meta-top {
   color: var(--color-gray);
 }
 
