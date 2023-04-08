@@ -1,293 +1,351 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from jthemes.net/themes/html/quizo/version-6/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 21:25:43 GMT -->
+<!-- Mirrored from templates.seekviral.com/qzain/quiz/Quiz12/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 07 Apr 2023 22:47:50 GMT -->
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Artplus{% endblock %}</title>
-    {% block css %}
-        <!-- FontAwesome-cdn include -->
+    <title>Quiz</title>
 
-        <link rel="stylesheet" href="{{ asset('cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css') }}">
-        <!-- Google fonts include -->
-        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800;900&amp;family=Poppins:wght@700;800&amp;display=swap" rel="stylesheet">
-        <!-- Bootstrap-css include -->
-        <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-        <!-- Animate-css include -->
-        <link rel="stylesheet" href="{{asset('css/animate.min.css')}}">
-        <!-- Main-StyleSheet include -->
-        <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    {% endblock %}
+    <!-- fonts -->
+    <link rel="stylesheet" href="{{asset('fonts/font.css')}}"/>
+
+    <!-- fontawesome 5 -->
+    <link rel="stylesheet" href="{{asset('cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css')}}" />
+
+    <!-- bootstrap 5 -->
+    <link rel="stylesheet" href="{{asset('css/Bootstrap/bootstrap.min.css')}}">
+
+    <!-- Custom Css Files -->
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/responsive.css')}}">>
+    <link rel="stylesheet" href="{{asset('css/animation.css')}}">>
+
+    <!--Thankyou CSS-->
+    <link rel="stylesheet" href="{{asset('css/thankyou.css')}}">>
 </head>
-{% block body %}
 <body>
 
-<div class="wrapper overflow-hidden">
-    <!-- Top content -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="logo_area pt-5 ps-5">
-                  <img src="{{asset('img/logo/logo.png')}}" alt="image-not-found">
-                    </a>
+<main class="overflow-hidden">
+    <div class="timer">
+        <h2><span id="countdown-timer">60</span>sec</h2>
+    </div>
+    <div class="container">
+        <div class="row h-100">
+            <div class="col-md-12">
+                <div class="step-bar">
+                    <div class="fill"></div>
                 </div>
-            </div>
-            <div class="col-sm-6 d-none d-sm-block">
-                <div class="count_box d-flex float-end pt-5 pe-5">
-                    <div class="count_clock countdown_timer d-flex align-items-center pe-5 me-3" data-countdown="2022/10/24">
-                    </div>
-                    <!-- <div id="countdown"></div> -->
-                    <!-- Step Progress bar -->
-                    <div class="count_progress clip-1">
-                     <span class="progress-left">
-                        <span class="progress_bar"></span>
-                     </span>
-                        <span class="progress-right">
-                        <span class="progress_bar"></span>
-                     </span>
-                        <div class="progress-value">
-                            <div id="value">100%</div>
+                <form method="post" class="show-section">
+                    <div class="move">
+                        <div class="avatar">
+                            <img src="{{asset('images/girl.png')}}" alt="avatar">
                         </div>
+                        <h3 class="step-count">
+                            Question <span id="activeStep">1</span>/5
+                        </h3>
                     </div>
-                </div>
+
+                    <!-- step 1 -->
+                    <section class="steps">
+                        <h1 class="quiz-question">
+                            Never have time for yourself Because you  Need to take Care of your Family?
+                        </h1>
+
+                        <!-- form -->
+                        <fieldset id="step1">
+                            <div class="row overflow-hidden">
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field me-auto bounce-left">
+                                            <input type="radio" name="op1" value="Russia">
+                                            <label>Russia</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field ms-auto bounce-left delay-100">
+                                            <input type="radio" name="op1" value="America">
+                                            <label>America</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field me-auto bounce-left delay-200">
+                                            <input type="radio" name="op1" value="Australia">
+                                            <label>Australia</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field ms-auto  bounce-left delay-300">
+                                            <input type="radio" name="op1" value="Hong Kong">
+                                            <label>Hong Kong</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="next-prev">
+                            <button type="button" class="next" id="step1btn">next question<i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </section>
+
+                    <!-- step 2 -->
+                    <section class="steps">
+                        <h1 class="quiz-question">
+                            The logo For Luxury Car Maker Porsche Features Which Animal?
+                        </h1>
+
+                        <!-- form -->
+                        <fieldset id="step2">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field me-auto bounce-left">
+                                            <input type="radio" name="op2" value="horse">
+                                            <label>horse</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field ms-auto bounce-left delay-100">
+                                            <input type="radio" name="op2" value="tiger">
+                                            <label>tiger</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field me-auto bounce-left delay-200">
+                                            <input type="radio" name="op2" value="dog">
+                                            <label>dog</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field ms-auto  bounce-left delay-300">
+                                            <input type="radio" name="op2" value="cat">
+                                            <label>cat</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="next-prev">
+                            <button type="button" class="prev"><i class="fa-solid fa-arrow-left"></i>last question</button>
+                            <button type="button" class="next" id="step2btn">next question<i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </section>
+
+                    <!-- step 3 -->
+                    <section class="steps">
+                        <h1 class="quiz-question">
+                            Never have time for yourself Because you  Need to take Care of your Family?
+                        </h1>
+
+                        <!-- form -->
+                        <fieldset id="step3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field me-auto bounce-left">
+                                            <input type="radio" name="op3" value="Russia">
+                                            <label>Russia</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field ms-auto bounce-left delay-100">
+                                            <input type="radio" name="op3" value="America">
+                                            <label>America</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field me-auto bounce-left delay-200">
+                                            <input type="radio" name="op3" value="Australia">
+                                            <label>Australia</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field ms-auto  bounce-left delay-300">
+                                            <input type="radio" name="op3" value="Hong Kong">
+                                            <label>Hong Kong</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="next-prev">
+                            <button type="button" class="prev">last question<i class="fa-solid fa-arrow-right"></i></button>
+                            <button type="button" class="next" id="step3btn">next question<i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </section>
+
+                    <!-- step 4 -->
+                    <section class="steps">
+                        <h1 class="quiz-question">
+                            The logo For Luxury Car Maker Porsche Features Which Animal?
+                        </h1>
+
+                        <!-- form -->
+                        <fieldset id="step4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field me-auto bounce-left">
+                                            <input type="radio" name="op4" value="horse">
+                                            <label>horse</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field ms-auto bounce-left delay-100">
+                                            <input type="radio" name="op4" value="tiger">
+                                            <label>tiger</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field me-auto bounce-left delay-200">
+                                            <input type="radio" name="op4" value="dog">
+                                            <label>dog</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field ms-auto  bounce-left delay-300">
+                                            <input type="radio" name="op4" value="cat">
+                                            <label>cat</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="next-prev">
+                            <button type="button" class="prev"><i class="fa-solid fa-arrow-left"></i>last question</button>
+                            <button type="button" class="next" id="step4btn">next question<i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </section>
+
+                    <!-- step 5 -->
+                    <section class="steps">
+                        <h1 class="quiz-question">
+                            Which animal spends 18 to 21 hours a day resting and sleeping?
+                        </h1>
+
+                        <!-- form -->
+                        <fieldset id="step5">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field me-auto bounce-left">
+                                            <input type="radio" name="op5" value="Lion">
+                                            <label>Lion</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field ms-auto bounce-left delay-100">
+                                            <input type="radio" name="op5" value="lioness">
+                                            <label>lioness</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field me-auto bounce-left delay-200">
+                                            <input type="radio" name="op5" value="cub">
+                                            <label>cub</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <div class="radio-field ms-auto  bounce-left delay-300">
+                                            <input type="radio" name="op5" value="sea lion">
+                                            <label>sea lion</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="next-prev">
+                            <button type="button" class="prev"><i class="fa-solid fa-arrow-left"></i>last question</button>
+                            <button type="button" class="next" id="sub">Submit<i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </section>
+                </form>
+
             </div>
         </div>
     </div>
-    <div class="container">
-        <form class="multisteps_form bg-white position-relative overflow-hidden" id="wizard" method="POST" action="https://jthemes.net/themes/html/quizo/thankyou/index-3.html">
-            <!------------------------- Step-1 ----------------------------->
-            <div class="multisteps_form_panel step">
-                <div class="question_title text-center text-uppercase">
-                    <h1 class="animate__animated animate__fadeInRight animate_25ms">What kind of services you are quiz?</h1>
-                </div>
-                <div class="question_number text-center text-uppercase text-white">
-                    <span class="rounded-pill">Question 1 to 5</span>
-                </div>
-                <div class="row pt-5 mt-4 form_items">
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="active step_1 animate__animated animate__fadeInRight animate_50ms">
-                                <input id="opt_1" type="radio" name="stp_1_select_option" value="Well organized and Easy">
-                                <label for="opt_1">Well organized and Easy</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_1 animate__animated animate__fadeInRight animate_100ms">
-                                <input id="opt_2" type="radio" name="stp_1_select_option" value="Transition Between Two">
-                                <label for="opt_2">Transition Between Two</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_1 animate__animated animate__fadeInRight animate_150ms">
-                                <input id="opt_3" type="radio" name="stp_1_select_option" value="Transitions are Shown">
-                                <label for="opt_3">Transitions are Shown</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_1 animate__animated animate__fadeInRight animate_200ms">
-                                <input id="opt_4" type="radio" name="stp_1_select_option" value="Generate a nice Color">
-                                <label for="opt_4">Generate a nice Color</label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+</main>
+
+<!-- result -->
+<div class="loadingresult">
+    <img src="{{asset('images/loading.gif')}}" alt="loading">
+</div>
+
+<div class="main  thankyou-page">
+    <div class="main-inner">
+        <div class="logo">
+            <div class="logo-icon">
+                <img src="{{asset('images/logo.png')}}" alt="">
             </div>
-            <!------------------------- Step-2 ----------------------------->
-            <div class="multisteps_form_panel step">
-                <div class="question_title text-center text-uppercase">
-                    <h1 class="animate__animated animate__fadeInRight animate_25ms">The iron ore mined at Bailadila is mostly</h1>
-                </div>
-                <div class="question_number text-center text-uppercase text-white">
-                    <span class="rounded-pill">Question 2 to 5</span>
-                </div>
-                <div class="row pt-5 mt-4 form_items">
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_2 animate__animated animate__fadeInRight animate_50ms">
-                                <input id="opt_5" type="radio" name="stp_2_select_option" value="haematite">
-                                <label for="opt_5">haematite</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_2 animate__animated animate__fadeInRight animate_100ms">
-                                <input id="opt_6" type="radio" name="stp_2_select_option" value="limonite">
-                                <label for="opt_6">limonite</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_2 animate__animated animate__fadeInRight animate_150ms">
-                                <input id="opt_7" type="radio" name="stp_2_select_option" value="siderite">
-                                <label for="opt_7">siderite</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_2 animate__animated animate__fadeInRight animate_200ms">
-                                <input id="opt_8" type="radio" name="stp_2_select_option" value="magnetic">
-                                <label for="opt_8">magnetic</label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="logo-text">
+                Qzain.
             </div>
-            <!------------------------- Step-3 ----------------------------->
-            <div class="multisteps_form_panel step">
-                <div class="question_title text-center text-uppercase">
-                    <h1 class="animate__animated animate__fadeInRight animate_25ms">The leading state in producing paper is</h1>
-                </div>
-                <div class="question_number text-center text-uppercase text-white">
-                    <span class="rounded-pill">Question 3 to 5</span>
-                </div>
-                <div class="row pt-5 mt-4 form_items">
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_3 animate__animated animate__fadeInRight animate_50ms">
-                                <input id="opt_9" type="radio" name="stp_3_select_option" value="West Bengal">
-                                <label for="opt_9">West Bengal</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_3 animate__animated animate__fadeInRight animate_100ms">
-                                <input id="opt_10" type="radio" name="stp_3_select_option" value="Kerala">
-                                <label for="opt_10">Kerala</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_3 animate__animated animate__fadeInRight animate_150ms">
-                                <input id="opt_11" type="radio" name="stp_3_select_option" value="Bihar">
-                                <label for="opt_11">Bihar</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_3 animate__animated animate__fadeInRight animate_200ms">
-                                <input id="opt_12" type="radio" name="stp_3_select_option" value="Orissa">
-                                <label for="opt_12">Orissa</label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!------------------------- Step-4 ----------------------------->
-            <div class="multisteps_form_panel step">
-                <div class="question_title text-center text-uppercase">
-                    <h1 class="animate__animated animate__fadeInRight animate_25ms">The largest dune files are found in</h1>
-                </div>
-                <div class="question_number text-center text-uppercase text-white">
-                    <span class="rounded-pill">Question 4 to 5</span>
-                </div>
-                <div class="row pt-5 mt-4 form_items">
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_4 animate__animated animate__fadeInRight animate_50ms">
-                                <input id="opt_13" type="radio" name="stp_4_select_option" value="West Bengal">
-                                <label for="opt_13">West Bengal</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_4 animate__animated animate__fadeInRight animate_100ms">
-                                <input id="opt_14" type="radio" name="stp_4_select_option" value="Kerala">
-                                <label for="opt_14">Kerala</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_4 animate__animated animate__fadeInRight animate_150ms">
-                                <input id="opt_15" type="radio" name="stp_4_select_option" value="Bihar">
-                                <label for="opt_15">Bihar</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_4 animate__animated animate__fadeInRight animate_200ms">
-                                <input id="opt_16" type="radio" name="stp_4_select_option" value="Orissa">
-                                <label for="opt_16">Orissa</label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!------------------------- Step-5 ----------------------------->
-            <div class="multisteps_form_panel step">
-                <div class="question_title text-center text-uppercase">
-                    <h1 class="animate__animated animate__fadeInRight animate_25ms">The least explosive type of volcano is called</h1>
-                </div>
-                <div class="question_number text-center text-uppercase text-white">
-                    <span class="rounded-pill">Question 5 to 5</span>
-                </div>
-                <div class="row pt-5 mt-4 form_items">
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_5 animate__animated animate__fadeInRight animate_50ms">
-                                <input id="opt_17" type="radio" name="stp_5_select_option" value="Basalt plateau">
-                                <label for="opt_17">Basalt plateau</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_5 animate__animated animate__fadeInRight animate_100ms">
-                                <input id="opt_18" type="radio" name="stp_5_select_option" value="Cinder cone">
-                                <label for="opt_18">Cinder cone</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_5 animate__animated animate__fadeInRight animate_150ms">
-                                <input id="opt_19" type="radio" name="stp_5_select_option" value="Shield volcanoes">
-                                <label for="opt_19">Shield volcanoes</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled p-0">
-                            <li class="step_5 animate__animated animate__fadeInRight animate_200ms">
-                                <input id="opt_20" type="radio" name="stp_5_select_option" value="Composite volcanoes">
-                                <label for="opt_20">Composite volcanoes</label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!---------- Form Button ---------->
-            <div class="form_btn">
-                <button type="button" class="prev_btn position-absolute text-uppercase border-0" id="prevBtn" onclick="nextPrev(-1)"> <span><i class="fas fa-arrow-left"></i></span> Back</button>
-                <button type="button" class="next_btn rounded-pill position-absolute text-uppercase text-white" id="nextBtn" onclick="nextPrev(1)">Next</button>
-            </div>
-        </form>
+        </div>
+        <article>
+            <h1><span>Thank You</span> For Your Time!</h1>
+            <span>Your submission has been received</span>
+            <p>
+                Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque
+                usu, facete detracto patrioque an per, lucilius pertinacia eu vel.
+            </p>
+        </article>
+
+        <div class="social-media">
+            <a href="#"><i class="fa-brands fa-google"></i>Google</a>
+            <a href="#"><i class="fa-brands fa-apple"></i>Apple ID</a>
+            <a href="#"><i class="fa-brands fa-facebook"></i>Facebook</a>
+        </div>
+        <div class="mb-5 back-home">
+            <a href="https://templates.seekviral.com/index.html">Back to Home</a>
+        </div>
     </div>
 </div>
-<!-- jQuery-js include -->
-{% block javascripts %}
-<script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
-<script src="{{asset('js/bootstrap.min.js')}}"></script>
-<script src="{{asset('js/countdown.js')}}"></script>
-<script src="{{asset('js/jquery.validate.min.js')}}"></script>
-<script src="{{asset('js/script.js')}}"></script>
-{% endblock %}
+
+<div id="error"></div>
+
+<!-- bootstrap 5 -->
+<script src="{{asset('Bootstrap/bootstrap.min.js')}}" ></script>
+
+<!-- jQuery -->
+<script src="{{asset('jQuery/jquery-3.6.3.min.js')}}"></script>
+
+<!-- <Thankyou JS -->
+<script src="{{asset('thankyou.js')}}"></script>
+<!-- Custom js -->
+<script src="{{asset('custom.js')}}"></script>
+
 </body>
-{% endblock %}
 
 </html>
