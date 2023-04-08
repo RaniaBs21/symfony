@@ -77,7 +77,7 @@ class QuizController extends AbstractController
     #[Route('/quiz', name: 'quiz')]
     public function index(): Response
     {
-        return $this->render('quiz/components-quiz.html.twig', [
+        return $this->render('quiz/components-quiz.html.twig.twig', [
             'QuizController' => 'QuizController',
         ]);
     }
@@ -87,7 +87,7 @@ class QuizController extends AbstractController
         $quiz = $doctrine
             ->getRepository(Quiz::class)
             ->findAll();
-        return $this->render('quiz/components-quiz.html.twig',
+        return $this->render('quiz/components-quiz.html.twig.twig',
             ["quiz" => $quiz]);
     }
 

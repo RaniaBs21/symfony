@@ -18,7 +18,7 @@ class HomeFrontController extends AbstractController
     #[Route('/quiz', name: 'quiz')]
     public function jouer(): Response
     {
-        return $this->render('home_front/Quiz.html.twig', [
+        return $this->render('home_front/index.html.twig', [
             'controller_name' => 'HomeFrontController',
         ]);
     }
