@@ -50,9 +50,12 @@ let game = [
         choice3: 'Raghuram Rajan',
         choice4: 'Nirmala Sitharaman',
         answer: 2,
+
     },
 
+
 ]
+
 
 const SCORE_POINTS = 100
 const MAX_QUESTIONS = 5
@@ -67,7 +70,7 @@ startGame = () => {
 getNewQuestion = () =>{
     if(availableQuestions.length ===0 || questionCounter > MAX_QUESTIONS){
         localStorage.setItem('mostRecentScore', score)
-        return window.location.assign('end.html')
+        return window.location.assign('end')
     }
     questionCounter++
     ProgressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
@@ -86,6 +89,7 @@ getNewQuestion = () =>{
 
 }
 
+
 choices.forEach(choice =>{
     choice.addEventListener('click', e => {
         if(!acceptingAnswers) return
@@ -97,6 +101,7 @@ choices.forEach(choice =>{
         let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
         if(classToApply === 'correct'){
             incrementScore(SCORE_POINTS)
+
         }
         selectedChoice.parentElement.classList.add(classToApply)
 

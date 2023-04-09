@@ -8,11 +8,5 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SignupController extends AbstractController
 {
-    #[Route('/signup', name: 'app_signup')]
-    public function index(): Response
-    {
-        return $this->render('home_front/signup.html.twig', [
-            'controller_name' => 'SignupController',
-        ]);
-    }
+
 }

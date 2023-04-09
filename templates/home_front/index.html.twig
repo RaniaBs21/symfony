@@ -12,13 +12,24 @@
 <body>
 <div class="container">
     <div id="home" class="flex-column flex-center">
-        <h1> General Quiz</h1>
+        <h1> Artplus</h1><img src="{{asset ('img/logo.png') }}">
+        <h1>Quiz</h1>
         <h1> Are you Ready?</h1>
-        <a href="{{asset('home_front/quiz.html.twig')}}" class="btn">Play</a>
-        <a href="{{asset('home_front/result.html.twig')}}"  id="highscore-btn"
+        <a href="{{path('app_quiz')}}" class="btn">Play</a>
+        <a href="{{asset('result.html.twig')}}"  id="highscore-btn"
            class="btn">High Scores<i class="fas fa-crown"></i>   </a>
 
     </div>
+
+
+
+    <script src="{{asset ('js/bootstrap.min.js') }}"></script>
+
+    <script src="{{asset ('js/countdown.js') }}"></script>
+
+    <script src="{{asset ('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{asset ('js/jquery.validate.min.js') }}"></script>
+    <script src="{{asset ('js/script.js') }}"></script>
 </div>
 </body>
 </html>
