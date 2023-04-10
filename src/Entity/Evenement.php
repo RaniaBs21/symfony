@@ -69,7 +69,7 @@ class Evenement
      *
      * @ORM\Column(name="date_ev", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $dateEv = 'CURRENT_TIMESTAMP';
+    private $dateEv;
 
     /**
      * @var int
@@ -79,11 +79,14 @@ class Evenement
     private $nbrePlaces;
 
     /**
-     * @var int
+     * @var \Admin
      *
-     * @ORM\Column(name="id_g", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Admin")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_g", referencedColumnName="id")
+     * })
      */
-    private $idG;
+    private ?Admin $idG = null;
 
     public function getIdEv(): ?int
     {
@@ -186,12 +189,12 @@ class Evenement
         return $this;
     }
 
-    public function getIdG(): ?int
+    public function getIdG(): ?Admin
     {
         return $this->idG;
     }
 
-    public function setIdG(int $idG): self
+    public function setIdG(Admin $idG): self
     {
         $this->idG = $idG;
 

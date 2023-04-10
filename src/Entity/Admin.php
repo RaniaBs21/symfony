@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Admin
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+    
+    /**
      * @var string|null
      *
      * @ORM\Column(name="nom_u", type="string", length=255, nullable=true)
@@ -67,18 +76,6 @@ class Admin
      * @ORM\Column(name="pwd", type="string", length=20, nullable=false)
      */
     private $pwd;
-
-    /**
-     * @var \Topic
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Topic")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
-     * })
-     */
-    private $id;
 
     public function getNomU(): ?string
     {

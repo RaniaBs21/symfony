@@ -1,0 +1,43 @@
+{% extends 'home/base.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+    <h1>Evenement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Categorie</th>
+                <th>Adresse</th>
+                <th>Region</th>
+                <th>Date</th>
+                <th>Nombre de places</th>              
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.titreEv }}</td>
+                <td>{{ evenement.categorieEv }}</td>
+                <td>{{ evenement.adresseEv }}</td>
+                <td>{{ evenement.region }}</td>
+                <td>{{ evenement.dateEv ? evenement.dateEv|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ evenement.nbrePlaces }}</td>
+                <td>
+                    <a href="{{ path('app_evenement_show', {'idEv': evenement.idEv}) }}">show</a>
+                    <a href="{{ path('app_evenement_edit', {'idEv': evenement.idEv}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_evenement_new') }}">Create new</a>
+{% endblock %}
