@@ -26,7 +26,7 @@ class EvenementType extends AbstractType
                 ],
             ])
             ->add('descriptionEv')
-            ->add('imageEv', FileType::class)
+            ->add('imageEv', FileType::class, array('data_class' => null))
             ->add('adresseEv')
             ->add('region', ChoiceType::class, [
                 'choices'  => [

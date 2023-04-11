@@ -23,5 +23,7 @@
     <div class="form-group">
         {{ form_row(form.nbrePlaces, {'attr': {'class': 'form-control'}}) }}
     </div>
-    <button class="btn {{ button_color|default('btn-outline-primary') }}  mt-3">{{ button_label|default('Ajouter') }}</button>
+    <div class="form-group">
+        </a><button class="btn float-right {{ button_color|default('btn btn-warning') }}  mt-3">{{ button_label|default('Ajouter') }}</button>
+    </div>
 {{ form_end(form) }}

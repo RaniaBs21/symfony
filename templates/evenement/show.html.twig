@@ -1,58 +1,33 @@
-<!DOCTYPE html>
-
-<title>Evenement</title>
+{% extends 'home/base.html.twig' %}
 
 {% block body %}
-    <h1>Evenement</h1>
+    <div class="container">
+            <h2 class="text-center mt-5 mb-3">Evenement</h2>
+            <div class="card">
+                <div class="card-header">
+                    <a class="btn btn-outline-info float-right" href="{{ path('app_evenement_index') }}"> 
+                        Liste des évènements
+                    </a>
+                </div>
+                <div class="card-body">
+                <b class="text-muted">Titre:</b>
+                <p>{{ evenement.titreEv }}</p>
+                <b class="text-muted">Categorie:</b>
+                <p>{{ evenement.categorieEv }}</p>
+                <b class="text-muted">Description:</b>
+                <p>{{ evenement.descriptionEv }}</p>
+                <b class="text-muted">Date de l'évènement:</b>
+                <p>{{  evenement.dateEv ? evenement.dateEv|date('Y-m-d H:i:s') : '' }}</p>
+                <b class="text-muted">Localisation:</b>
+                <p>{{ evenement.adresseEv }}</p>
+                <b class="text-muted">Région:</b>
+                <p>{{ evenement.region }}</p>
+                <b class="text-muted">Nombres de places à réserver:</b>
+                <p>{{ evenement.nbrePlaces }}</p>
+                
+                
+            </div>
+        </div>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>IdEv</th>
-                <td>{{ evenement.idEv }}</td>
-            </tr>
-            <tr>
-                <th>TitreEv</th>
-                <td>{{ evenement.titreEv }}</td>
-            </tr>
-            <tr>
-                <th>CategorieEv</th>
-                <td>{{ evenement.categorieEv }}</td>
-            </tr>
-            <tr>
-                <th>DescriptionEv</th>
-                <td>{{ evenement.descriptionEv }}</td>
-            </tr>
-            <tr>
-                <th>ImageEv</th>
-                <td>{{ evenement.imageEv }}</td>
-            </tr>
-            <tr>
-                <th>AdresseEv</th>
-                <td>{{ evenement.adresseEv }}</td>
-            </tr>
-            <tr>
-                <th>Region</th>
-                <td>{{ evenement.region }}</td>
-            </tr>
-            <tr>
-                <th>DateEv</th>
-                <td>{{ evenement.dateEv ? evenement.dateEv|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>NbrePlaces</th>
-                <td>{{ evenement.nbrePlaces }}</td>
-            </tr>
-            <tr>
-                <th>IdG</th>
-                <td>{{ evenement.idG }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_evenement_index') }}">back to list</a>
-
-    <a href="{{ path('app_evenement_edit', {'idEv': evenement.idEv}) }}">edit</a>
-
-    {{ include('evenement/_delete_form.html.twig') }}
 {% endblock %}
