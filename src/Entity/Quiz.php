@@ -80,14 +80,11 @@ class Quiz
     private $reponseCorrecte;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Admin", inversedBy="quiz")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
-     * })
-
+     * @var int
+     **@ORM\ManyToOne(targetEntity="App\Entity\Admin", inversedBy="Quiz")
+     * @ORM\Column(name="id", type="integer", nullable=true)
      */
-    private $admin;
-
+    private $id;
     public function getIdQuiz(): ?int
     {
         return $this->idQuiz;
@@ -178,12 +175,13 @@ class Quiz
         return $this;
     }
 
-    public function getId(): ?Admin
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(?Admin $id): self
+
+    public function setId(int $id): self
     {
         $this->id = $id;
 

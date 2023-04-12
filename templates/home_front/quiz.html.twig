@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Page</title>
+    <title>{% block title %}Quiz Page{% endblock %}</title>
     <link rel="stylesheet" href="{{asset('css/style.css.css')}}">
     <link rel="stylesheet" href="{{asset('css/game.css')}}">
-    <title>Compte à rebours</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style type="text/css">
         #countdown {
             font-size: 80px;
@@ -16,8 +16,12 @@
             text-align: center;
         }
     </style>
+
 </head>
+{% block body %}
+
 <body>
+
 <div id="countdown"></div>
 
 <script type="text/javascript">
@@ -28,15 +32,52 @@
             if (count == 0) {
                 clearInterval(countdown);
                 alert("Temps écoulé !");
-                currentQuestion++;
-
+                loadNextQuestion(); // charge la prochaine question
             }
             count--;
         }, 1000);
     });
+
+    function loadNextQuestion() {
+        function loadNextQuestion() {
+            // masquer le bouton de soumission si c'est la dernière question
+            if (currentQuestionIndex === quiz.length - 1) {
+                submitButton.classList.add("hide");
+            }
+
+            // mettre à jour le texte de la question et les choix de réponse
+            const currentQuestion = quiz[currentQuestionIndex];
+            questionElement.innerText = currentQuestion.question;
+            choiceElements.forEach((choice, index) => {
+                choice.innerText = currentQuestion["option" + (index + 1)];
+            });
+        }
+
+// définir la fonction pour traiter la réponse de l'utilisateur
+        function handleAnswerClick(event) {
+            // vérifier si l'utilisateur a sélectionné une réponse
+            if (!event.target.dataset.number) return;
+
+            // passer à la question suivante
+            currentQuestionIndex++;
+
+            // afficher la question suivante
+            loadNextQuestion();
+        }
+
+// ajouter l'événement de clic pour les boutons de réponse
+        choiceElements.forEach(choice => {
+            choice.addEventListener("click", handleAnswerClick);
+        });
+
+// afficher la première question
+        loadNextQuestion();
+    }
 </script>
 
 <div class="container" >
+
+ {% for quiz in quiz %}
     <div id="game" class="justify-center flex-column">
         <div class="count_box d-flex float-end pt-5 pe-5"></div>
         <div id="hud">
@@ -57,27 +98,35 @@
                 </h1>
             </div>
         </div>
-        <h1 id="question">What is the answer to this question</h1>
-        <div class="choice-container">
-            <p class="choice-prefix">A</p>
-            <p class="choice-text" data-number="1">Choice 1</p>
-        </div>
-        <div class="choice-container">
-            <p class="choice-prefix">B</p>
-            <p class="choice-text" data-number="2">Choice 2</p>
-        </div>
-        <div class="choice-container">
-            <p class="choice-prefix">C</p>
-            <p class="choice-text" data-number="3">Choice 3</p>
-        </div>
-        <div class="choice-container"  >
-            <p class="choice-prefix">D</p>
-            <p class="choice-text" data-number="4">Choice 4</p>
-        </div>
+
+<div>
+    <h1 id="question">{{ quiz.question }}</h1>
+    <div class="choice-container">
+        <p class="choice-prefix">A</p>
+        <p class="choice-text" data-number="1">{{ quiz.option1 }}</p>
     </div>
+    <div class="choice-container">
+        <p class="choice-prefix">B</p>
+        <p class="choice-text" data-number="2">{{ quiz.option2 }}</p>
+    </div>
+    <div class="choice-container">
+        <p class="choice-prefix">C</p>
+        <p class="choice-text" data-number="3">{{ quiz.option3 }}</p>
+    </div>
+    <div class="choice-container"  >
+        <p class="choice-prefix">D</p>
+        <p class="choice-text" data-number="4">{{ quiz.option4 }}</p>
+    </div>
+    {% endfor %}
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</div>
+
+{% block css %}
 <script src="{{asset('js/game.js') }}"></script>
-<script src="{{asset('js/countdown.js') }}"></script>
+{% endblock %}
+
 </body>
+{% endblock %}
+
 </html>

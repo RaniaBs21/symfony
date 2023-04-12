@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EndController extends AbstractController
 {
-    #[Route('/end', name: 'ap_end')]
+    #[Route('/end', name: 'app_end')]
     public function dx(): Response
     {
         return $this->render('home_front/end.html.twig', [

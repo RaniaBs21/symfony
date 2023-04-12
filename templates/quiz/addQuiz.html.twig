@@ -410,112 +410,78 @@
                         <!-- General Form Elements -->
                         {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
 
-                            <div class="row mb-3">
-                                {{ form_label(form.titre, 'Titre', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
-                                <div class="col-sm-10">
-                                    {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_errors(form.titre) }}
-                                </div>
-
-                            </div>
-
-                            <div class="row mb-3">
-
-                                {{ form_label(form.option1, 'Option1', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+                        <section class="section" style="width: 200%;">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card col-sm-10 mx-auto text-center">
+                                        <div class="card-body">
 
 
-                                <div class="col-sm-10">
-                                    {{ form_widget(form.option1, {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_errors(form.option1) }}
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                {{ form_label(form.option2, 'Option2', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+                                            <!-- General Form Elements -->
+                                            {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
 
-                                <div class="col-sm-10">
-                                    {{ form_widget(form.option2, {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_errors(form.option2) }}
-                                </div>
+                                            <div class="form-group row mb-3">
+                                                <label for="{{ form.titre.vars.id }}" class="col-sm-2 col-form-label">Titre</label>
+                                                <div class="col-sm-10">
+                                                    {{ form_widget(form.titre, {attr: {class: 'form-control'}}) }}
+                                                    {{ form_errors(form.titre) }}
+                                                </div>
+                                            </div>
 
-                            </div>
+                                            <div class="form-group row mb-3">
+                                                <label for="{{ form.option1.vars.id }}" class="col-sm-2 col-form-label">Option 1</label>
+                                                <div class="col-sm-10">
+                                                    {{ form_widget(form.option1, {'attr': {'class': 'form-control'}}) }}
+                                                    {{ form_errors(form.option1) }}
+                                                </div>
+                                            </div>
 
-                            <div class="row mb-3">
-                                {{ form_label(form.option3, 'Option3', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+                                            <div class="form-group row mb-3">
+                                                <label for="{{ form.option2.vars.id }}" class="col-sm-2 col-form-label">Option 2</label>
+                                                <div class="col-sm-10">
+                                                    {{ form_widget(form.option2, {attr: {class: 'form-control'}}) }}
+                                                    {{ form_errors(form.option2) }}
+                                                </div>
+                                            </div>
 
-                                <div class="col-sm-10">
-                                    {{ form_widget(form.option3, {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_errors(form.option3) }}
-                                </div>
+                                            <div class="form-group row mb-3">
+                                                <label for="{{ form.option3.vars.id }}" class="col-sm-2 col-form-label">Option 3</label>
+                                                <div class="col-sm-10">
+                                                    {{ form_widget(form.option3, {attr: {class: 'form-control'}}) }}
+                                                    {{ form_errors(form.option3) }}
+                                                </div>
+                                            </div>
 
-                            </div>
-                            <div class="row mb-3">
-                                {{ form_label(form.option4, 'Option4', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+                                            <div class="form-group row mb-3">
+                                                <label for="{{ form.option4.vars.id }}" class="col-sm-2 col-form-label">Option 4</label>
+                                                <div class="col-sm-10">
+                                                    {{ form_widget(form.option4, {attr: {class: 'form-control'}}) }}
+                                                    {{ form_errors(form.option4) }}
+                                                </div>
+                                            </div>
 
-                                <div class="col-sm-10">
-                                    {{ form_widget(form.option4, {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_errors(form.option4) }}
+                                            <div class="form-group row mb-3">
+                                                <label for="{{ form.question.vars.id }}" class="col-sm-2 col-form-label">Question</label>
+                                                <div class="col-sm-10">
+                                                    {{ form_widget(form.question, {attr: {class: 'form-control'}}) }}
+                                                    {{ form_errors(form.question) }}
+                                                </div>
+                                            </div>
 
-                                </div>
+                                            <div class="form-group row mb-3">
+                                                <legend class="col-form-label col-sm-2 pt-0">Réponse correcte</legend>
+                                                <div class="col-sm-10">
+                                                    {{ form_widget(form.reponseCorrecte, {attr: {class: 'form-control'}}) }}
+                                                </div>
+                                            </div>
 
-
-                            </div>
-                        <div class="row mb-3">
-                            {{ form_label(form.question, 'Question', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
-
-
-                            <div class="col-sm-10">
-                                {{ form_widget(form.question, {'attr': {'class': 'form-control'}}) }}
-                                {{ form_errors(form.question) }}
-                            </div>
-
-                        </div>
-
-
-                               <fieldset class="row mb-3">
-
-                                       <legend class="col-form-label col-sm-2 pt-0">{{ form_label(form.reponseCorrecte )}}</legend>
-
-
-                                   <div class="col-sm-10" style="border-bottom: 1px solid black; display: flex; flex-direction: row;">
-                                       <div class="form-check">
-
-
-                                           <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                                           <label class="form-check-label" for="gridRadios1">
-                                               option1
-                                           </label>
-                                       </div>
-                                       <div class="form-check">
-                                           <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                                           <label class="form-check-label" for="gridRadios2">
-                                               option2
-                                           </label>
-                                       </div>
-                                       <div class="form-check">
-                                           <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-                                           <label class="form-check-label" for="gridRadios3">
-                                               option3
-                                           </label>
-                                       </div>
-                                       <div class="form-check">
-                                           <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option4">
-
-                                           <label class="form-check-label" for="gridRadios4">
-                                               option4
-                                           </label>
-                                       </div>
-                                   </div>
-
-                               </fieldset>
-                               <div class="row mb-3">
-
-                                <div class="col-sm-10 text-center">
-                                    {{ form_widget(form.ajouter,{'attr':{'class':'btn btn-primary'}}) }}
+                                            <div class="form-group row mb-3">
+                                                <div class="col-sm-10 mx-auto text-center">
+                                                    <button class="btn {{ button_color|default('btn-outline-primary') }} mt-3">{{ button_label|default('Ajouter') }}</button>
                                 </div>
                             </div>
+                        {{ form_end(form) }}
 
-
-                    </div>
                 </div>
 
             </div>
@@ -526,7 +492,7 @@
         </div>
 
     </section>
-
+                    </div>
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->

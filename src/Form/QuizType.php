@@ -77,16 +77,10 @@ class QuizType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('ajouter', SubmitType::class)
 
 
-            ->add('delete', SubmitType::class, [
-                'label' => 'Supprimer',
-                'attr' => [
-                    'onclick' => 'return confirm("Êtes-vous sûr de vouloir supprimer ce quiz ?");'
-                ]
-            ])
             ->getForm();
+
         ;
     }
 

@@ -6,6 +6,7 @@ use App\Entity\Quiz;
 
 use App\Form\QuizType;
 
+use App\Form\UpdateType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -87,7 +88,7 @@ class QuizController extends AbstractController
         $quiz = $doctrine
             ->getRepository(Quiz::class)
             ->findAll();
-        return $this->render('quiz/components-quiz.html.twig.twig',
+        return $this->render('quiz/components-quiz.html.twig',
             ["quiz" => $quiz]);
     }
 
@@ -122,7 +123,7 @@ class QuizController extends AbstractController
             throw $this->createNotFoundException('Quiz non trouvé pour l\'identifiant '.$idQuiz);
         }
 
-        $form = $this->createForm(QuizType::class, $quiz);
+        $form = $this->createForm(UpdateType::class, $quiz);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -9,7 +9,7 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Favicons -->
+  <!-- Favicons -->y
   {% block css %}
     <link href="{{asset('img/favicon.png')}}" rel="icon">
     <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
@@ -594,19 +594,9 @@
 
 
                     <a href="{{ path('quiz_update', {'idQuiz': quiz.idQuiz }) }}"><img src="{{ asset('/img/crayon.png') }}" height="20" width="20" /></a>
-                    <a href="{{ path('quiz_delete', {'idQuiz': quiz.idQuiz }) }}"><img src="{{ asset('/img/supprimer.png') }}" height="20" width="20" class="delete-link"/></a>
-                    <script>
-                      var deleteLinks = document.querySelectorAll('.delete-link');
-                      for (var i = 0; i < deleteLinks.length; i++) {
-                        deleteLinks[i].addEventListener('click', function(event) {
-                          event.preventDefault();
-                          var confirmation = confirm('Êtes-vous sûr de vouloir supprimer ce quiz ?');
-                          if (confirmation) {
-                            window.location.href = "{{ path('read_Quiz', {'idQuiz': quiz.idQuiz }) }}";
-                          }
-                        });
-                      }
-                    </script>
+                    <a href="{{ path('quiz_delete', {'idQuiz': quiz.idQuiz }) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce quiz ?')">
+                      <img src="{{ asset('/img/supprimer.png') }}" height="20" width="20" class="delete-link"/>
+                    </a>
 
                   </td>
                 </tr>
