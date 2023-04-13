@@ -1,7 +1,8 @@
-const questionContainer = document.getElementById("question-container");
-const questionElement = document.getElementById("question");
-const choiceElements = document.querySelectorAll(".choice-text");
-const submitButton = document.getElementById("submit");
+const question = document.querySelector('#question');
+const choices = Array.from(document.querySelectorAll('.choice-text'));
+const ProgressText = document.querySelector('#progressText');
+const scoreText = document.querySelector('#score');
+const progressBarFull = document.querySelector('#progressBarFull');
 
 let currentQuestion = {}
 let acceptingAnswers = true
@@ -9,52 +10,49 @@ let score = 0
 let questionCounter = 0
 let availableQuestions = []
 
-let game = [
+let questions = [
     {
-        question: 'Which country hosted Olympic games 2020?',
-        choice1: 'USA',
-        choice2: 'China',
-        choice3: 'Japan',
-        choice4: 'India',
+        question: 'Quel est le nom de l’architecte du musée d’art contemporain de Niteroi - Brésil ?',
+        choice1: ' Fernando Romero',
+        choice2: ' Oscar Niemeyer',
+        choice3: 'Franck Gehry',
+        choice4: ' Jean Nouvel',
         answer: 3,
     },
     {
-        question: 'What is the Capital of Spain?',
-        choice1: 'Madrid',
-        choice2: 'Lisbon',
-        choice3: 'Paris',
-        choice4: 'Moscow',
+        question: 'Qu’est-ce qu’une “performance” ?',
+        choice1: ' Une prouesse artistique',
+        choice2: ' Une technique de peinture',
+        choice3: 'Une manifestation artistique',
+        choice4: ' Une œuvre où l’action du corps est au cœur du concept',
         answer: 1,
     },
     {
-        question: 'What is the Currency of Russia?',
-        choice1: 'Dirham',
-        choice2: 'Dollar',
-        choice3: 'Yen',
-        choice4: 'Ruble',
+        question: 'Souvent des artistes sont invités par des grandes marques à collaborer avec des grandes marques',
+        choice1: 'Christian Dior',
+        choice2: 'Louis Vuitton',
+        choice3: ' Comme des garçons',
+        choice4: ' Adidas',
         answer: 4,
     },
     {
-        question: 'What is the Rank of India in 2020 Global Hunger Index',
-        choice1: '107',
-        choice2: '89',
-        choice3: '94',
-        choice4: '101',
+        question: 'Qui a écrit La Chartreuse de Parme ?',
+        choice1: 'Balzac',
+        choice2: 'Standhal',
+        choice3: 'Flaubert',
+        choice4: 'Marivaux',
         answer: 3,
     },
     {
-        question: 'Who is the current Governor of RBI?',
-        choice1: 'Urijit Patel',
-        choice2: 'Shaktikanta Das',
-        choice3: 'Raghuram Rajan',
-        choice4: 'Nirmala Sitharaman',
+        question: '“Impression, soleil levant” est un tableau de :',
+        choice1: 'Turner',
+        choice2: 'Monet',
+        choice3: 'corot',
+        choice4: 'Picasso',
         answer: 2,
-
     },
 
-
 ]
-
 
 const SCORE_POINTS = 100
 const MAX_QUESTIONS = 5
@@ -62,60 +60,55 @@ const MAX_QUESTIONS = 5
 startGame = () => {
     questionCounter = 0;
     score = 0;
-    availableQuestions = [...game]
-    getNewQuestion = () => {
-        if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
-            localStorage.setItem('mostRecentScore', score)
-            return window.location.assign('/end')
+    availableQuestions = [...questions]
+    getNewQuestion()
+}
+
+getNewQuestion = () =>{
+    if(availableQuestions.length ===0 || questionCounter > MAX_QUESTIONS){
+        localStorage.setItem('mostRecentScore', score)
+        return window.location.assign('/end')
+    }
+    questionCounter++
+    ProgressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
+    progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
+
+    const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
+    currentQuestion = availableQuestions[questionsIndex]
+    question.innerText = currentQuestion.question
+
+    choices.forEach(choice =>{
+        const number = choice.dataset['number']
+        choice.innerText = currentQuestion['choice' + number]
+    })
+    availableQuestions.splice(questionsIndex, 1)
+    acceptingAnswers = true
+
+}
+
+choices.forEach(choice =>{
+    choice.addEventListener('click', e => {
+        if(!acceptingAnswers) return
+
+        acceptingAnswers = false
+        const selectedChoice = e.target
+        const selectedAnswer = selectedChoice.dataset['number']
+
+        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
+        if(classToApply === 'correct'){
+            incrementScore(SCORE_POINTS)
         }
-        questionCounter++
-        ProgressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
-        progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`
+        selectedChoice.parentElement.classList.add(classToApply)
 
-        const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
-        currentQuestion = availableQuestions[questionsIndex]
-        question.innerText = currentQuestion.question
-
-        choices.forEach(choice => {
-            const number = choice.dataset['number']
-            choice.innerText = currentQuestion['choice' + number]
-        })
-        availableQuestions.splice(questionsIndex, 1)
-        acceptingAnswers = true
-
-        // Delay of 15 seconds before displaying the new question
         setTimeout(() => {
-            acceptingAnswers = true
+            selectedChoice.parentElement.classList.remove(classToApply)
             getNewQuestion()
-        }, 15000);
+        },1000)
+    })
+})
 
-
-        choices.forEach(choice => {
-            choice.addEventListener('click', e => {
-                if (!acceptingAnswers) return
-
-                acceptingAnswers = false
-                const selectedChoice = e.target
-                const selectedAnswer = selectedChoice.dataset['number']
-
-                let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
-                if (classToApply === 'correct') {
-                    incrementScore(SCORE_POINTS)
-
-                }
-                selectedChoice.parentElement.classList.add(classToApply)
-
-                setTimeout(() => {
-                    selectedChoice.parentElement.classList.remove(classToApply)
-                    getNewQuestion()
-                }, 1000)
-            })
-        })
-
-        incrementScore = num => {
-            score += num
-            scoreText.innerText = score
-        }
-        startGame()
-    }
-    }
+incrementScore = num => {
+    score +=num
+    scoreText.innerText = score
+}
+startGame()

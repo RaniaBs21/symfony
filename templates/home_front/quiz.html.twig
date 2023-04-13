@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Quiz Page{% endblock %}</title>
+    <title>Quiz Page</title>
     <link rel="stylesheet" href="{{asset('css/style.css.css')}}">
     <link rel="stylesheet" href="{{asset('css/game.css')}}">
+    <title>Compte à rebours</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <style type="text/css">
         #countdown {
             font-size: 80px;
@@ -16,70 +16,28 @@
             text-align: center;
         }
     </style>
-
 </head>
-{% block body %}
-
 <body>
-
 <div id="countdown"></div>
 
 <script type="text/javascript">
     let ready = $(document).ready(function() {
-        var count = 15;
+        var count = 30;
         var countdown = setInterval(function () {
             $("#countdown").html(count);
             if (count == 0) {
                 clearInterval(countdown);
                 alert("Temps écoulé !");
-                loadNextQuestion(); // charge la prochaine question
+                currentQuestion++;
+
             }
             count--;
         }, 1000);
     });
-
-    function loadNextQuestion() {
-        function loadNextQuestion() {
-            // masquer le bouton de soumission si c'est la dernière question
-            if (currentQuestionIndex === quiz.length - 1) {
-                submitButton.classList.add("hide");
-            }
-
-            // mettre à jour le texte de la question et les choix de réponse
-            const currentQuestion = quiz[currentQuestionIndex];
-            questionElement.innerText = currentQuestion.question;
-            choiceElements.forEach((choice, index) => {
-                choice.innerText = currentQuestion["option" + (index + 1)];
-            });
-        }
-
-// définir la fonction pour traiter la réponse de l'utilisateur
-        function handleAnswerClick(event) {
-            // vérifier si l'utilisateur a sélectionné une réponse
-            if (!event.target.dataset.number) return;
-
-            // passer à la question suivante
-            currentQuestionIndex++;
-
-            // afficher la question suivante
-            loadNextQuestion();
-        }
-
-// ajouter l'événement de clic pour les boutons de réponse
-        choiceElements.forEach(choice => {
-            choice.addEventListener("click", handleAnswerClick);
-        });
-
-// afficher la première question
-        loadNextQuestion();
-    }
 </script>
 
 <div class="container" >
-
- {% for quiz in quiz %}
     <div id="game" class="justify-center flex-column">
-        <div class="count_box d-flex float-end pt-5 pe-5"></div>
         <div id="hud">
             <div class="hud-item">
                 <p id="progressText" class="hud-prefix">
@@ -99,34 +57,77 @@
             </div>
         </div>
 
-<div>
-    <h1 id="question">{{ quiz.question }}</h1>
-    <div class="choice-container">
-        <p class="choice-prefix">A</p>
-        <p class="choice-text" data-number="1">{{ quiz.option1 }}</p>
-    </div>
-    <div class="choice-container">
-        <p class="choice-prefix">B</p>
-        <p class="choice-text" data-number="2">{{ quiz.option2 }}</p>
-    </div>
-    <div class="choice-container">
-        <p class="choice-prefix">C</p>
-        <p class="choice-text" data-number="3">{{ quiz.option3 }}</p>
-    </div>
-    <div class="choice-container"  >
-        <p class="choice-prefix">D</p>
-        <p class="choice-text" data-number="4">{{ quiz.option4 }}</p>
-    </div>
-    {% endfor %}
-</div>
+        <div class="question-container">
+            {% if quiz[0].question is defined %}
+                <h1 id="question">{{ quiz[0].question }}</h1>
+            {% endif %}
 
-</div>
+            {% if quiz[0].option1 is defined %}
+                <div class="choice-container">
+                    <p class="choice-prefix">A</p>
+                    <p class="choice-text" data-number="1">{{ quiz[0].option1 }}</p>
+                </div>
+            {% endif %}
 
-{% block css %}
-<script src="{{asset('js/game.js') }}"></script>
-{% endblock %}
+            {% if quiz[0].option2 is defined %}
+                <div class="choice-container">
+                    <p class="choice-prefix">B</p>
+                    <p class="choice-text" data-number="2">{{ quiz[0].option2 }}</p>
+                </div>
+            {% endif %}
 
+            {% if quiz[0].option3 is defined %}
+                <div class="choice-container">
+                    <p class="choice-prefix">C</p>
+                    <p class="choice-text" data-number="3">{{ quiz[0].option3 }}</p>
+                </div>
+            {% endif %}
+
+            {% if quiz[0].option4 is defined %}
+                <div class="choice-container"  >
+                    <p class="choice-prefix">D</p>
+                    <p class="choice-text" data-number="4">{{ quiz[0].option4 }}</p>
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="question-container" style="display: none;">
+            {% if quiz[1].question is defined %}
+                <h1 id="question">{{ quiz[1].question }}</h1>
+            {% endif %}
+
+            {% if quiz[1].option1 is defined %}
+                <div class="choice-container">
+                    <p class="choice-prefix">A</p>
+                    <p class="choice-text" data-number="1">{{ quiz[1].option1 }}</p>
+                </div>
+            {% endif %}
+
+            {% if quiz[1].option2 is defined %}
+                <div class="choice-container">
+                    <p class="choice-prefix">B</p>
+                    <p class="choice-text" data-number="2">{{ quiz[1].option2 }}</p>
+                </div>
+            {% endif %}
+
+            {% if quiz[1].option3 is defined %}
+                <div class="choice-container">
+                    <p class="choice-prefix">C</p>
+                    <p class="choice-text" data-number="3">{{ quiz[1].option3 }}</p>
+                </div>
+            {% endif %}
+
+            {% if quiz[1].option4 is defined %}
+                <div class="choice-container">
+                    <p class="choice-prefix">C</p>
+                    <p class="choice-text" data-number="3">{{ quiz[1].option4 }}</p>
+                </div>
+            {% endif %}
+
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="{{asset('js/game.js') }}"></script>
+            <script src="{{asset('js/countdown.js') }}"></script>
 </body>
-{% endblock %}
-
 </html>

@@ -14,7 +14,7 @@ body {
   padding: 0;
   counter-reset: points;
   background-color: var(--violet);
-  background-image: url("https://alcs-huddle.netlify.app/images/bg-desktop.svg");
+  background-image: url("https://fonts.googleapis.com/css2?family=Nova+Square&display=swapc");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: contain;

@@ -84,6 +84,15 @@ class QuizFrontController extends AbstractController
 
 
     }
+    #[Route('/resultat', name: 'app_result')]
+    public function resultat(): Response
+    {
+
+        return $this->redirectToRoute('result');
+
+
+
+    }
     #[Route('/quiz', name: 'quiz')]
     public function quizAction(): Response
     {

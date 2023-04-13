@@ -21,6 +21,7 @@ class QuizType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank(),
                     new Assert\Length(['min' => 5, 'max' => 50]),
+
                 ],
             ])
             ->add('question', null, [

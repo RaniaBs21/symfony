@@ -10,4 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ResultController extends AbstractController
 {
+    #[Route('/result', name: 'result')]
+    public function dx(): Response
+    {
+        return $this->render('home_front/result.html.twig', [
+            'controller_name' => 'EndFrontController',
+        ]);
+    }
 }
