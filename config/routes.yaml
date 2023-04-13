@@ -1,8 +1,9 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-display_image:
-    path: '/event/front/{id}/image'
+app_event_image:
+    path: '/event/front/{idEv}/image'
     controller: 'App\Controller\EventFrontController::displayImageAction'
     requirements:
-        id: '\d+'
+        idEv: '\d+'
+

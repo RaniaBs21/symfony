@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Entity\Participation;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-
+use Symfony\Component\HttpFoundation\Request;
 class EventFrontController extends AbstractController
 {
     #[Route('/event/front', name: 'app_event_front')]
@@ -54,21 +55,44 @@ class EventFrontController extends AbstractController
             'evenement' => $evenement,
         ]);
     }
-    
-    public function displayImageAction($eventId)
+    #[Route('/event/front/{idEv}/image', name: 'app_event_image', methods: ['GET'])]   
+    public function displayImageAction($idEv)
     {
-        $event = $this->getDoctrine()->getRepository(Evenement::class)->find($eventId);
+        $event = $this->getDoctrine()->getRepository(Evenement::class)->find($idEv);
 
         if (!$event) {
             throw $this->createNotFoundException('Event not found');
         }
 
-        $imageData = $event->getImageData();
+        $imageData = $event->getImageEv();
 
         $response = new BinaryFileResponse(stream_get_contents($imageData));
         $response->headers->set('Content-Type', 'image/png');
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE);
 
         return $response;
+    }
+    /**
+    * @Route("/event/front/{idEv}/participate", name="app_event_participate")
+    */
+    public function participateAction(Request $request, $idEv)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $event = $em->getRepository(Evenement::class)->find($idEv);
+        if (!$event) {
+            throw $this->createNotFoundException('Event not found');
+        }
+
+        $participation = new Participation();
+        //$participation->setUser($this->getUser());
+        $participation->setIdEv($event);
+
+        $em->persist($participation);
+        $em->flush();
+
+        $this->addFlash('success', 'Vous êtes inscrit à l\'événement '.$event->getTitre());
+
+        return $this->redirectToRoute('app_event_front');
     }
 }

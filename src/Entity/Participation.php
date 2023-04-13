@@ -31,7 +31,7 @@ class Participation
      *   @ORM\JoinColumn(name="Id_Ut", referencedColumnName="id")
      * })
      */
-    private $idU;
+    private ?Admin $idU = null;
 
     /**
      * @var \Evenement

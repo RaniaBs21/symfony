@@ -12,9 +12,11 @@ class ParticipationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('dateParticipation')
-            ->add('idU')
-            ->add('idEv')
+            //->add('dateParticipation')
+            //->add('idU')
+            //->add('idEv')
+            ->add('Participer', SubmitType::class)
+            ->add('Desinscrire', SubmitType::class)
         ;
     }
 
