@@ -4,12 +4,13 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Evenement
  *
  * @ORM\Table(name="evenement", indexes={@ORM\Index(name="iduser", columns={"id_g"}), @ORM\Index(name="id_g", columns={"id_g"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\EvenementRepository")
  */
 class Evenement
 {
@@ -26,6 +27,7 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="titre_ev", type="string", length=100, nullable=false)
+     * @Assert\NotBlank
      */
     private $titreEv;
 
@@ -33,6 +35,7 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="categorie_ev", type="string", length=50, nullable=false)
+     * @Assert\NotBlank
      */
     private $categorieEv;
 
@@ -40,6 +43,7 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="description_ev", type="string", length=200, nullable=false)
+     * @Assert\NotBlank
      */
     private $descriptionEv;
 
@@ -47,6 +51,7 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="image_ev", type="blob", length=0, nullable=false)
+     * @Assert\NotBlank
      */
     private $imageEv;
 
@@ -54,6 +59,7 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="adresse_ev", type="string", length=30, nullable=false)
+     * @Assert\NotBlank
      */
     private $adresseEv;
 
@@ -61,6 +67,7 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="region", type="string", length=30, nullable=false)
+     * @Assert\NotBlank
      */
     private $region;
 
@@ -68,6 +75,7 @@ class Evenement
      * @var \DateTime
      *
      * @ORM\Column(name="date_ev", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @Assert\NotBlank
      */
     private $dateEv;
 
@@ -75,6 +83,7 @@ class Evenement
      * @var int
      *
      * @ORM\Column(name="nbre_places", type="integer", nullable=false)
+     * @Assert\NotBlank
      */
     private $nbrePlaces;
 

@@ -32,8 +32,10 @@ class EvenementController extends AbstractController
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
-
+        //dd($this->getUser());
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            //$evenement->setIdG($this->getUser());
             $entityManager->persist($evenement);
             $entityManager->flush();
 

@@ -38,7 +38,7 @@ class EvenementType extends AbstractType
                     'Sousse' => 'regionSousse',
                 ],
             ])
-            ->add('dateEv')
+            ->add('dateEv')    
             ->add('nbrePlaces')
             //->add('idG')
         ;
