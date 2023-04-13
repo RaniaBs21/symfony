@@ -48,8 +48,7 @@ class Evenement
     private $descriptionEv;
 
     /**
-     * @var string
-     *
+     * 
      * @ORM\Column(name="image_ev", type="blob", length=0, nullable=false)
      * @Assert\NotBlank
      */

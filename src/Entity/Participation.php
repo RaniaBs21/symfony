@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ParticipationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+
 
 /**
  * Participation
@@ -79,6 +81,7 @@ class Participation
         return $this;
     }
 
+
     public function getDateParticipation(): ?\DateTimeInterface
     {
         return $this->dateParticipation;
@@ -91,5 +94,10 @@ class Participation
         return $this;
     }
 
+    public function __construct()
+    {
+        $this->dateParticipation = new DateTime('now');
+    }
+    
 
 }

@@ -84,14 +84,24 @@ class EventFrontController extends AbstractController
             throw $this->createNotFoundException('Event not found');
         }
 
+        $participationRepository = $em->getRepository(Participation::class);
+        $participationList = $participationRepository->findBy([
+        'idU' => $this->getUser(),
+        'idEv' => $event,
+        ]);
+
+        if (!empty($participationList)) {
+            $this->addFlash('warning', 'Vous participez déjà à cet événement.');
+            return $this->redirectToRoute('app_event_show', ['idEv' => $idEv]);
+        }
         $participation = new Participation();
-        //$participation->setUser($this->getUser());
+        //$participation->setIdU($this->getUser());
         $participation->setIdEv($event);
 
         $em->persist($participation);
         $em->flush();
 
-        $this->addFlash('success', 'Vous êtes inscrit à l\'événement '.$event->getTitre());
+        $this->addFlash('success', 'Vous êtes inscrit à l\'événement '.$event->getTitreEv());
 
         return $this->redirectToRoute('app_event_front');
     }
