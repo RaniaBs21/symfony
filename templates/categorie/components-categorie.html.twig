@@ -4,6 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
   <title>{% block title %}ArtPlus{% endblock %}</title>
   <meta content="" name="description">
@@ -306,7 +308,7 @@
         </a>
       </li><!-- End Niveaux Page Nav -->
 
-      <li class="nav-item">
+        <li class="nav-item">
       <a class="nav-link collapsed" href="{{ path('listAbonnement') }}">
           <i class="bi bi-card-list"></i>
           <span>Abonnements</span>
@@ -320,62 +322,74 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Les cours Disponibles</h1>
-      
+     <h1>Les categories </h1>
+     
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-25">
+        <div class="col-lg-18">
 
           <div class="card">
-          
-            <div class="card-body">
-          <div class="example" style="margin-top: -15px; margin-bottom: 30px">
+          <div class="card-body">
+        <div class="example" style="margin-top: -15px; margin-bottom: 30px">
+  <a href="{{ path('ajoutcat') }}" class="btn btn-warning" id="myButton">Ajouter categorie</a>
+</div>
 
-            <a href="{{ path('ajoutcours') }}" class="btn btn-warning">Ajouter un cours</a>
-            </div>
+<script>
+  let myButton = document.querySelector('#myButton');
 
-          
+  myButton.addEventListener('click', function() {
+    myButton.classList.add('animated');
+    setTimeout(function() {
+      myButton.classList.remove('animated');
+    }, 1000);
+  });
+</script>
 
-           
+<style>
+  .animated {
+    transition: all 0.5s ease-in-out;
+    width: 200px;
+  }
+</style>
+
+    
+         
+
               <!-- Default Table -->
               <table class="table">
+
                 <thead>
                   <tr>
                 
-                    <th scope="col" class="table-primary">Titre</th>
-                    <th scope="col" class="table-primary">Sous_categorie</th>
-                    <th scope="col" class="table-primary">Niveau</th>
-                    <th scope="col"  class="table-primary">Description</th>
-                     <th scope="col" class="table-primary">Date</th>
-                      <th scope="col" class="table-primary">Prix</th>
+                    <th scope="col" class="table-primary">Id</th>
+                    <th scope="col" class="table-primary">Nom</th>
+                   
                       <th scope="col" class="table-primary">Actions</th>
                   </tr>
                 </thead>
 
                 <tbody>
                 
-                 {% for cour in cour %}
+                 {% for categorie in categorie %}
                  <tr> 
-                  <td> {{cour.titreC}}</td>
-                  <td> {{cour.sousCategorie.nomSc}}</td>
-                  <td> {{cour.niveauC}}</td>
-                  <td> {{cour.descriptionC}}</td>
-                   <td>{{ cour.dateC|date('d/m/Y') }}</td>
-
-                  <td> {{cour.prix}}DT</td>
+                  <td> {{categorie.idCat}}</td>
+                  <td> {{categorie.nomCat}}</td></td>
+                 
                   <td>
-                 <a href="{{ path('updatedCours', {'idC': cour.idC}) }}"><img src="{{ asset('/img/modif.png') }}" height="18" width="18" /></a>
-                 <a href="{{ path('deleteCours', {'idC': cour.idC}) }}"><img src="{{ asset('/img/supprimer.png') }}" height="28" width="28" /></a>
+                  <a href="{{ path('updateCategorie', {'idCat': categorie.idCat}) }}"><img src="{{ asset('/img/modif.png') }}" height="18" width="18" /></a>
+                  <a href="{{ path('Deletecat', {'idCat': categorie.idCat}) }}"><img src="{{ asset('/img/supprimer.png') }}" height="28" width="28" /></a>
                   </td>
                   </tr>
                   {% endfor %}
                   </table>
-                  </div>
                  </tbody>
+            
+
+
               
-              <!-- End light Table Example -->
+
             </div>
           </div>
 

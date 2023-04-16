@@ -268,8 +268,7 @@
     </nav><!-- End Icons Navigation -->
 
   </header><!-- End Header -->
-
-   <!-- ======= Sidebar ======= -->
+  <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
@@ -305,14 +304,13 @@
           <span>Niveaux</span>
         </a>
       </li><!-- End Niveaux Page Nav -->
-
-      <li class="nav-item">
+      
+   <li class="nav-item">
       <a class="nav-link collapsed" href="{{ path('listAbonnement') }}">
           <i class="bi bi-card-list"></i>
           <span>Abonnements</span>
         </a>
       </li><!-- End Abonnements Page Nav -->
-
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -320,62 +318,54 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Les cours Disponibles</h1>
-      
+     <h1>Les Abonnements</h1>
+     
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-25">
+        <div class="col-lg-18">
 
           <div class="card">
-          
             <div class="card-body">
-          <div class="example" style="margin-top: -15px; margin-bottom: 30px">
+            <div class="example" style="margin-top: -15px; margin-bottom: 30px">
 
-            <a href="{{ path('ajoutcours') }}" class="btn btn-warning">Ajouter un cours</a>
             </div>
 
-          
+        
 
-           
               <!-- Default Table -->
               <table class="table">
+
                 <thead>
                   <tr>
                 
-                    <th scope="col" class="table-primary">Titre</th>
-                    <th scope="col" class="table-primary">Sous_categorie</th>
-                    <th scope="col" class="table-primary">Niveau</th>
-                    <th scope="col"  class="table-primary">Description</th>
-                     <th scope="col" class="table-primary">Date</th>
-                      <th scope="col" class="table-primary">Prix</th>
-                      <th scope="col" class="table-primary">Actions</th>
+                    <th scope="col" class="table-primary">Utilisateur</th>
+                    <th scope="col" class="table-primary">Cours choisi</th>
+                   
+                      <th scope="col" class="table-primary">Date</th>
                   </tr>
                 </thead>
 
                 <tbody>
                 
-                 {% for cour in cour %}
+                 {% for abonnement in abonnement %}
                  <tr> 
-                  <td> {{cour.titreC}}</td>
-                  <td> {{cour.sousCategorie.nomSc}}</td>
-                  <td> {{cour.niveauC}}</td>
-                  <td> {{cour.descriptionC}}</td>
-                   <td>{{ cour.dateC|date('d/m/Y') }}</td>
-
-                  <td> {{cour.prix}}DT</td>
-                  <td>
-                 <a href="{{ path('updatedCours', {'idC': cour.idC}) }}"><img src="{{ asset('/img/modif.png') }}" height="18" width="18" /></a>
-                 <a href="{{ path('deleteCours', {'idC': cour.idC}) }}"><img src="{{ asset('/img/supprimer.png') }}" height="28" width="28" /></a>
-                  </td>
+                 <td> {{abonnement.user}}</td>
+                  <td><span style="color: red">{{abonnement.cours.titreC}}</span></td>
+                 <td> {{abonnement.dateAbon|date('d/m/Y') }}</td>
+            
+                 
+                  
                   </tr>
                   {% endfor %}
                   </table>
-                  </div>
                  </tbody>
+            
+
+
               
-              <!-- End light Table Example -->
+
             </div>
           </div>
 

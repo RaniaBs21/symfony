@@ -44,14 +44,23 @@ class Abonnement
     private $user;
 
     /**
-     * @var \Transaction
+     * @var Transaction
      *
      * @ORM\ManyToOne(targetEntity="Transaction")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_transaction", referencedColumnName="id")
+     *  @ORM\JoinColumn(name="id_transaction", referencedColumnName="id")
      * })
      */
     private $idTransaction;
+
+
+    /**
+     * @var Cours
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Cours")
+     * @ORM\JoinColumn(name="id_cours", referencedColumnName="Id_c")
+     */
+    private $cours;
 
     public function getIdAbon(): ?int
     {
@@ -102,6 +111,18 @@ class Abonnement
     public function setIdTransaction(?Transaction $idTransaction): self
     {
         $this->idTransaction = $idTransaction;
+
+        return $this;
+    }
+
+    public function getCours(): ?Cours
+    {
+        return $this->cours;
+    }
+
+    public function setCours(?Cours $cours): self
+    {
+        $this->cours = $cours;
 
         return $this;
     }

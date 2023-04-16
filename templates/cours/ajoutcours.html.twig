@@ -10,8 +10,9 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('img/favicon.png')}}" rel="icon">
-  <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+   {% block css %}
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -27,7 +28,8 @@
   <link href="{{asset('vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="{{asset('css/style.css')}}" rel="stylesheet">
+   <link href="{{asset('css/style.css')}}" rel="stylesheet">
+   {% endblock %}
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -44,8 +46,8 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{path ('app_home')}}" class="logo d-flex align-items-center">
-        <img src="{{asset('img/logo1.png')}}" alt="">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">ArtPlus</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -160,7 +162,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="{{asset('img/messages-1.jpg')}}" alt="" class="rounded-circle">
+                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>Maria Hudson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -174,7 +176,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="{{asset('img/messages-2.jpg')}}" alt="" class="rounded-circle">
+                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>Anna Nelson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -188,7 +190,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="{{asset('img/messages-3.jpg')}}" alt="" class="rounded-circle">
+                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>David Muldon</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -211,7 +213,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{asset('img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
+            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -307,7 +309,7 @@
       </li><!-- End Niveaux Page Nav -->
 
       <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ path('listAbonnement') }}">
+      <a class="nav-link collapsed" href="{{ path('listCours') }}">
           <i class="bi bi-card-list"></i>
           <span>Abonnements</span>
         </a>
@@ -316,93 +318,115 @@
     </ul>
 
   </aside><!-- End Sidebar-->
-
   <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Les cours Disponibles</h1>
-      
-    </div><!-- End Page Title -->
+    
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-25">
+        <div class="col-lg-11">
 
           <div class="card">
-          
             <div class="card-body">
-          <div class="example" style="margin-top: -15px; margin-bottom: 30px">
+         <h5 class="card-title" style="margin-bottom: 60px ; margin-top: -20px">Ajout Cours</h5>
 
-            <a href="{{ path('ajoutcours') }}" class="btn btn-warning">Ajouter un cours</a>
-            </div>
+              <!-- General Form Elements -->
 
-          
+              {% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
 
-           
-              <!-- Default Table -->
-              <table class="table">
-                <thead>
-                  <tr>
-                
-                    <th scope="col" class="table-primary">Titre</th>
-                    <th scope="col" class="table-primary">Sous_categorie</th>
-                    <th scope="col" class="table-primary">Niveau</th>
-                    <th scope="col"  class="table-primary">Description</th>
-                     <th scope="col" class="table-primary">Date</th>
-                      <th scope="col" class="table-primary">Prix</th>
-                      <th scope="col" class="table-primary">Actions</th>
-                  </tr>
-                </thead>
+          {{ form_start(formCours,{'attr': {'novalidate' : 'novalidate'}}) }}
+             <div class="row mb-5">
+            {{ form_label(formCours.titreC, 'Titre', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+           <div class="col-sm-6">
+            {{ form_widget(formCours.titreC, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(formCours.titreC) }}
+        </div>
+    </div>
 
-                <tbody>
-                
-                 {% for cour in cour %}
-                 <tr> 
-                  <td> {{cour.titreC}}</td>
-                  <td> {{cour.sousCategorie.nomSc}}</td>
-                  <td> {{cour.niveauC}}</td>
-                  <td> {{cour.descriptionC}}</td>
-                   <td>{{ cour.dateC|date('d/m/Y') }}</td>
+   <div class="row mb-3">
+    {{ form_label(formCours.SousCategorie, 'Sous_categorie', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+    <div class="col-sm-6">
+        {{ form_widget(formCours.SousCategorie, {'attr': {'class': 'form-select', 'aria-label': 'Default select example'}}) }}
+        
+    </div>
+</div>
 
-                  <td> {{cour.prix}}DT</td>
-                  <td>
-                 <a href="{{ path('updatedCours', {'idC': cour.idC}) }}"><img src="{{ asset('/img/modif.png') }}" height="18" width="18" /></a>
-                 <a href="{{ path('deleteCours', {'idC': cour.idC}) }}"><img src="{{ asset('/img/supprimer.png') }}" height="28" width="28" /></a>
-                  </td>
-                  </tr>
-                  {% endfor %}
-                  </table>
-                  </div>
-                 </tbody>
-              
-              <!-- End light Table Example -->
+
+    <div class="row mb-3">
+        {{ form_label(formCours.niveauC, 'Level', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formCours.niveauC, {'attr': {'class': 'form-select', 'aria-label': 'Default select example'}}) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+    {{ form_label(formCours.fichierC, null, {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+    <div class="col-sm-6">
+        {{ form_widget(formCours.fichierC, {'attr': {'class': 'form-control', 'type': 'file', 'id': 'formFile'}}) }}
+        {{ form_errors(formCours.fichierC) }}
+    </div>
+</div>
+
+    <div class="row mb-3">
+        {{ form_label(formCours.descriptionC, 'Description', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(formCours.descriptionC, {'attr': {'class': 'form-control', 'style': 'height: 100px'}}) }}
+           {{ form_errors(formCours.descriptionC) }}
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        {{ form_label(formCours.prix, 'Prix', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        <div class="col-sm-6">
+        {{ form_widget(formCours.prix, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(formCours.prix) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-success">Ajouter</button>
+        </div>
+    </div>
+{{ form_end(formCours) }}
+
+
+
+
+
+
+              </form><!-- End General Form Elements -->
+
             </div>
           </div>
 
         </div>
-      </div>
-    </section>
+
+      
 
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>ArtPlus</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">WebSparkle</a>
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
     </div>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="{{asset('vendor/apexcharts/apexcharts.min.js')}}"></script>
+  <script src="{{asset('/vendor/apexcharts/apexcharts.min.js')}}"></script>
   <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('vendor/chart.js/chart.umd.js')}}"></script>
   <script src="{{asset('vendor/echarts/echarts.min.js')}}"></script>
