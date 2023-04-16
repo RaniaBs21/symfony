@@ -2,6 +2,7 @@
 
 namespace App\Controller\FrontController;
 
+use App\Entity\QuestionQuiz;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +18,8 @@ class HomeFrontController extends AbstractController
         ]);
     }
 
-    #[Route('/index', name: 'index')]
+
+        #[Route('/index', name: 'app_index')]
     public function c(): Response
     {
         return $this->render('home_front/index.html.twig', [
@@ -25,7 +27,7 @@ class HomeFrontController extends AbstractController
         ]);
     }
 
-    #[Route('/play', name: 'quiz')]
+    #[Route('/play', name: 'play')]
     public function play(): Response
     {
 

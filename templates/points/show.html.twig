@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Points{% endblock %}
+
+{% block body %}
+    <h1>Points</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdPoints</th>
+                <td>{{ point.idPoints }}</td>
+            </tr>
+            <tr>
+                <th>Score</th>
+                <td>{{ point.score }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_points_index') }}">back to list</a>
+
+    <a href="{{ path('app_points_edit', {'idPoints': point.idPoints}) }}">edit</a>
+
+    {{ include('points/_delete_form.html.twig') }}
+{% endblock %}

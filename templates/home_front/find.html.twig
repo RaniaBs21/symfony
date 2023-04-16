@@ -1,0 +1,10 @@
+<div id="searchResults">
+    {% if questions is empty %}
+        <p>Aucun résultat trouvé.</p>
+    {% else %}
+        {% for question_quiz in questions %}
+            <h2>{{ question_quiz.descQuestion }}</h2>
+
+        {% endfor %}
+    {% endif %}
+</div>

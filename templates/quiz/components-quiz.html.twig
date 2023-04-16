@@ -588,9 +588,11 @@
                   <td>{{ quiz.option3 }}</td>
                   <td>{{ quiz.option4 }}</td>
                   <td>{{ quiz.reponseCorrecte }}</td>
-                   <td>
+
+
+                  <td>
                     <a href="{{ path('quiz_update', {'idQuiz': quiz.idQuiz }) }}"><img src="{{ asset('/img/crayon.png') }}" height="20" width="20" /></a>
-                    <a href="{{ path('quiz_delete', {'idQuiz': quiz.idQuiz }) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce quiz ?')">
+                    <a href="{{ path('quiz_delete', {'idQuiz': quiz.idQuiz }) }}" onclick="if(!confirm('Êtes-vous sûr de vouloir supprimer ce quiz ?')) return false;">
                       <img src="{{ asset('/img/supprimer.png') }}" height="20" width="20" class="delete-link"/>
                     </a>
 

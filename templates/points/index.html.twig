@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Points index{% endblock %}
+
+{% block body %}
+    <h1>Points index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdPoints</th>
+                <th>Score</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for point in points %}
+            <tr>
+                <td>{{ point.idPoints }}</td>
+                <td>{{ point.score }}</td>
+                <td>
+                    <a href="{{ path('app_points_show', {'idPoints': point.idPoints}) }}">show</a>
+                    <a href="{{ path('app_points_edit', {'idPoints': point.idPoints}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_points_new') }}">Create new</a>
+{% endblock %}

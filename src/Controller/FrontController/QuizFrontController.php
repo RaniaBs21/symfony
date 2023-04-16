@@ -3,10 +3,12 @@
 namespace App\Controller\FrontController;
 
 use App\Entity\Points;
+use App\Entity\QuestionQuiz;
 use App\Entity\Quiz;
 
 use App\Form\QuizType;
 
+use App\Form\RechercheType;
 use App\Form\UpdateType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -24,11 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class QuizFrontController extends AbstractController
 {
-    #[Route('/index', name: 'app_index')]
-    public function index(): Response
-    {
-        return $this->redirectToRoute('index');
-    }
+
 
 
 #[Route('/quiz/userHighScore/{Id}', name: 'quiz_user_high_score')]
@@ -60,29 +58,13 @@ class QuizFrontController extends AbstractController
 
             return $this->redirectToRoute('quiz_save_score', ['id' => $Id]);
         }
-    #[Route('/signin', name: 'app_signin')]
-    public function signin(): Response
-    {
-        return $this->render('home_front/signin.html.twig', [
-            'controller_name' => 'SignupFrontController',
-        ]);
-    }
-    #[Route('/signup', name: 'app_signup')]
-    public function signup(): Response
-    {
-        return $this->render('home_front/signup.html.twig', [
-            'controller_name' => 'SignupFrontController',
-        ]);
-    }
+
 
     #[Route('/play', name: 'app_quiz')]
     public function play(): Response
     {
 
-        return $this->redirectToRoute('quiz');
-
-
-
+        return $this->redirectToRoute('play');
     }
     #[Route('/resultat', name: 'app_result')]
     public function resultat(): Response
@@ -93,15 +75,34 @@ class QuizFrontController extends AbstractController
 
 
     }
-    #[Route('/quiz', name: 'quiz')]
+    #[Route('/front', name: 'front_question')]
     public function quizAction(): Response
     {
-        $quiz= $this->getDoctrine()->getRepository(Quiz::class)->findAll();
-        return $this->render('home_front/quiz.html.twig', [
-            'quiz' => $quiz,
+        $question_quizzes= $this->getDoctrine()->getRepository(QuestionQuiz::class)->findAll();
+        return $this->render('home_front/index1.html.twig', [
+            'question_quizzes' => $question_quizzes,
         ]);
     }
+    /**
+     * @Route("/rechercheQ/", name="Question_par_desc")
+     * Method({"GET"})
+     */
+    public function QuestionPardesc(Request $request){
+
+        $question = new QuestionQuiz();
+        $form = $this->createForm(RechercheType::class,$question);
+        $form->handleRequest($request);
+
+        $articles= [];
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $descQuestion = $question->getDescQuestion();
 
 
+            $articles= $this->getDoctrine()->getRepository(QuestionQuiz::class)->findOneBydescQuestion($descQuestion);
+        }
+
+        return  $this->render('home_front/find.html.twig',[ 'form' =>$form->createView(), 'question_quiz' => $question]);
+    }
 
 }

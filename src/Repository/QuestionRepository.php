@@ -45,4 +45,26 @@ class QuestionRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findOneBydescQuestion($descQuestion): ?QuestionQuiz
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.descQuestion = :val')
+            ->setParameter('val', $descQuestion)
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function TriBydescQuestion(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.descQuestion','ASC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+
+            ;
+
+}
 }
