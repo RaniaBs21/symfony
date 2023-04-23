@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ReponseAss{% endblock %}
+
+{% block body %}
+    <h1>Create new ReponseAss</h1>
+
+    {{ include('reponse_ass_front/_form.html.twig') }}
+
+    <a href="{{ path('app_reponse_ass_front_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,6 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_row(form.typeQAss, {'label': 'Type Q Ass'}) }}
+    {{ form_row(form.descriptionQAss, {'label': 'Description Q Ass'}) }}
+    {{ form_errors(form.descriptionQAss) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

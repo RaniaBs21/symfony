@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReponseAss index{% endblock %}
+
+{% block body %}
+    <h1>ReponseAss index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdRepAss</th>
+                <th>TypeRepAss</th>
+                <th>QueRepAss</th>
+                <th>DescriptionRepAss</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reponse_ass in reponse_asses %}
+            <tr>
+                <td>{{ reponse_ass.idRepAss }}</td>
+                <td>{{ reponse_ass.typeRepAss }}</td>
+                <td>{{ reponse_ass.queRepAss }}</td>
+                <td>{{ reponse_ass.descriptionRepAss }}</td>
+                <td>
+                    <a href="{{ path('app_reponse_ass_front_show', {'idRepAss': reponse_ass.idRepAss}) }}">show</a>
+                    <a href="{{ path('app_reponse_ass_front_edit', {'idRepAss': reponse_ass.idRepAss}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reponse_ass_front_new') }}">Create new</a>
+{% endblock %}

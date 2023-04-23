@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Reclamation Table</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdRec</th>
+                <th>TypeRec</th>
+                <th>DescriptionRec</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.idRec }}</td>
+                <td>{{ reclamation.typeRec }}</td>
+                <td>{{ reclamation.descriptionRec }}</td>
+                <td>
+                    <a href="{{ path('app_reclamation_show', {'idRec': reclamation.idRec}) }}">show</a>
+                    <a href="{{ path('app_reclamation_edit', {'idRec': reclamation.idRec}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reclamation_new') }}">Create new</a>
+{% endblock %}
