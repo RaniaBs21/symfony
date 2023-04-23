@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Entity\Participation;
+use App\Entity\Admin;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -80,29 +81,58 @@ class EventFrontController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $event = $em->getRepository(Evenement::class)->find($idEv);
+        $idUt = 2; // ID de l'objet Admin à récupérer
+        $adminRepository = $em->getRepository(Admin::class);
+        $admin = $adminRepository->find($idUt);
+        $participation = $em->getRepository(Participation::class)->findBy([
+            //'idU' => $this->getUser(),
+            'idU' => $admin,
+            'idEv' => $event,
+            ]);
+        
         if (!$event) {
             throw $this->createNotFoundException('Event not found');
-        }
-
-        $participationRepository = $em->getRepository(Participation::class);
-        $participationList = $participationRepository->findBy([
-        'idU' => $this->getUser(),
-        'idEv' => $event,
-        ]);
-
-        if (!empty($participationList)) {
+        } elseif($participation) {
             $this->addFlash('warning', 'Vous participez déjà à cet événement.');
-            return $this->redirectToRoute('app_event_show', ['idEv' => $idEv]);
-        }
+            //return $this->redirectToRoute('app_event_show', ['idEv' => $idEv]);
+        } else{
+
+
+        /*$idUt = 2; // ID de l'objet Admin à récupérer
+        $adminRepository = $entityManager->getRepository(Admin::class);
+        $admin = $adminRepository->find($idUt);
+
         $participation = new Participation();
+        $participation->setIdU($admin);
+        $participation->setIdEv($event);
+        $participation->setDateParticipation(new \DateTime());
+
+        $event->setNbrePlaces($event->getNbrePlaces() - 1);
+
+        $entityManager->persist($participation);
+        $entityManager->persist($event);
+        $entityManager->flush();*/
+
+        $participation = new Participation();
+        $participation->setIdU($admin);
         //$participation->setIdU($this->getUser());
         $participation->setIdEv($event);
+        $participation->setDateParticipation(new \DateTime());
+
+        $event->setNbrePlaces($event->getNbrePlaces() - 1);
 
         $em->persist($participation);
+        $em->persist($event);
         $em->flush();
+
+        /*$em->persist($participation);
+        $em->flush();*/
 
         $this->addFlash('success', 'Vous êtes inscrit à l\'événement '.$event->getTitreEv());
 
+        //return $this->redirectToRoute('app_event_front');
+        }
         return $this->redirectToRoute('app_event_front');
     }
+ 
 }

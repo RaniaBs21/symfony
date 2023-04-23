@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Participation;
+use App\Entity\Admin;
+use App\Entity\Evenement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +39,17 @@ class ParticipationRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+    public function findAllWithUserAndEvenement()
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->leftjoin('p.idU', 'u')
+            ->join('p.idEv', 'e')
+            ->select('u.nomU AS nomUtilisateur','u.prenomU AS prenomUtilisateur','e.titreEv AS titreEvenement','e.dateEv AS dateEvenement', 'p.dateParticipation')
+            //->select('p, u.nomU as nomUtilisateur, e.titreEv as titreEvenement')
+            ->getQuery();
+
+        return $qb->getResult();
     }
 
 //    /**

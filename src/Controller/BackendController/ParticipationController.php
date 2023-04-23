@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\BackendController;
 
 use App\Entity\Participation;
+use App\Entity\Evenement;
+use App\Repository\ParticipationRepository;
 use App\Form\ParticipationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,10 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 #[Route('/participation')]
 class ParticipationController extends AbstractController
 {
-    #[Route('/', name: 'app_participation_index', methods: ['GET'])]
+    /*#[Route('/', name: 'app_participation_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $participations = $entityManager
@@ -21,6 +24,15 @@ class ParticipationController extends AbstractController
             ->findAll();
 
         return $this->render('participation/index.html.twig', [
+            'participations' => $participations,
+        ]);
+    }*/
+    #[Route('/', name: 'app_participation_index', methods: ['GET'])]
+    public function index(ParticipationRepository $repository): Response
+    {
+        $participations = $repository->findAllWithUserAndEvenement();
+
+        return $this->render('participation/list_participations.html.twig', [
             'participations' => $participations,
         ]);
     }

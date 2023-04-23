@@ -33,9 +33,14 @@
     </div><!-- End Breadcrumbs -->
 
     <!-- ======= Blog Section ======= -->
+    {% for type, messages in app.session.flashbag.all() %}
+      {% for message in messages %}
+          <div class="alert alert-{{ type }}">{{ message }}</div>
+      {% endfor %}
+    {% endfor %}
+
     <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
-
         <div class="row g-5">
 
           <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
@@ -47,6 +52,7 @@
                   <div class="post-img">
                     {#<img src="{{ path('app_event_image', { 'idEv': evenement.idEv }) }}" alt="" class="img-fluid"/>#}
                     <img src="{{ asset('/img/img1.png') }}"  alt="" class="img-fluid" /></a>
+                    
                   </div>
 
                   <h2 class="title">
@@ -67,9 +73,14 @@
                   {#<div class="form-group">
                       <a href="{{ path('app_participation_new') }}"><button class="btn float-right {{ button_color|default('btn btn-warning') }}  mt-3">{{ button_label|default('Participer') }}</button></a>
                   </div>#}
-                <form method="post" action="{{ path('app_event_participate', {'idEv': evenement.idEv}) }}">
-                  <button type="submit" class="btn btn-primary">Participer</button>
-                </form>
+                  
+                {% if evenement.getNbrePlaces() > 0 %}
+                  <form method="post" action="{{ path('app_event_participate', {'idEv': evenement.idEv}) }}">
+                    <button type="submit" class="btn btn-primary">Participer</button>
+                  </form>
+                {% else %}
+                    <p>L'événement est complet.</p>
+                {% endif %}
                   <div class="read-more mt-auto align-self-end">
                   <a href="{{ path('app_event_show', {'idEv': evenement.idEv}) }}">Plus de détails<i class="bi bi-arrow-right"></i></a>
                 

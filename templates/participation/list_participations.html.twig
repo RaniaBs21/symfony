@@ -1,0 +1,36 @@
+{% extends 'home/base.html.twig' %}
+ 
+{% block title %}Participant index{% endblock %}
+
+{% block body %}
+    <div class="container">
+            <h2 class="text-center mt-5 mb-3">Les participants</h2>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Utilisateur</th>
+                            <th>Événement</th>
+                            <th>Date participation</th>
+                            <th>Date Événement</th>
+                            <br>                         
+                        </tr>
+                        {% for participation in participations %}
+                        <tr>
+                            <td>{{ participation.nomUtilisateur ~ ' ' ~  participation.prenomUtilisateur }}</td>
+                            <td>{{ participation.titreEvenement }}</td>
+                            <td>{{ participation.dateParticipation|date('d/m/Y H:i') }}</td>
+                            <td>{{ participation.dateEvenement|date('d/m/Y H:i') }}</td>
+                        </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="11">no records found</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>    
+{% endblock %}
+
+
