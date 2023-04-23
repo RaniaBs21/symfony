@@ -81,4 +81,22 @@ class ReclamationController extends AbstractController
 
         return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+#[Route('/searchRec', name: 'app_reclamation_search', methods: ['GET', 'POST'])]
+public function search(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $typeRec = $request->query->get('typeRec');
+    $sort = $request->query->get('sort');
+    $direction = $request->query->get('direction');
+
+    $reclamations = $entityManager
+        ->getRepository(Reclamation::class)
+        ->findBy(['typeRec' => $typeRec], [$sort => $direction]);
+
+    return $this->render('reclamation/index.html.twig', [
+        'reclamations' => $reclamations,
+    ]);
+}
+
+
 }

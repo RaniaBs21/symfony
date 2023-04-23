@@ -9,3 +9,10 @@ app_reponse_ass_search:
     path: /searchR
     controller: App\Controller\BackendController\ReponseAssController::search 
     methods: [GET, POST]
+app_reclamation_search:
+    path: /searchRec
+    controller: App\Controller\BackendController\ReclamationController::search 
+    methods: [GET, POST]
+
+
+    
