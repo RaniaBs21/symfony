@@ -2,6 +2,10 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 app_question_ass_search:
-    path: /search
+    path: /searchQ
     controller: App\Controller\BackendController\QuestionAssController::search
+    methods: [GET, POST]
+app_reponse_ass_search:
+    path: /searchR
+    controller: App\Controller\BackendController\ReponseAssController::search 
     methods: [GET, POST]

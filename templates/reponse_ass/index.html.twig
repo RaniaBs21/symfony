@@ -3,6 +3,30 @@
 {% block body %}
     <h1>Table Reponse</h1>
 
+    <form method="get" action="{{ path('app_reponse_ass_search') }}">
+        <div class="form-group">
+            <label>Type Reponse:</label>
+            <input type="text" class="form-control" name="typeRepAss" value="{{ app.request.query.get('typeRepAss') }}">
+        </div>
+        <div class="form-group">
+            <label>Sort by:</label>
+            <select class="form-control" name="sort">
+                <option value="idRepAss" {% if app.request.query.get('sort') == 'idRepAss' %}selected{% endif %}>Id</option>
+                <option value="typeRepAss" {% if app.request.query.get('sort') == 'typeRepAss' %}selected{% endif %}>Type Reponse</option>
+                <option value="queRepAss" {% if app.request.query.get('sort') == 'queRepAss' %}selected{% endif %}>Question correspondante</option>
+                <option value="descriptionRepAss" {% if app.request.query.get('sort') == 'descriptionRepAss' %}selected{% endif %}>Description Reponse</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Direction:</label>
+            <select class="form-control" name="direction">
+                <option value="ASC" {% if app.request.query.get('direction') == 'ASC' %}selected{% endif %}>Ascending</option>
+                <option value="DESC" {% if app.request.query.get('direction') == 'DESC' %}selected{% endif %}>Descending</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
     <table class="table">
         <thead>
             <tr>

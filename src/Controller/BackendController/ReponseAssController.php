@@ -81,4 +81,21 @@ class ReponseAssController extends AbstractController
 
         return $this->redirectToRoute('app_reponse_ass_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/searchR', name: 'app_reponse_ass_search', methods: ['GET', 'POST'])]
+public function search(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $typeRepAss = $request->query->get('typeRepAss');
+    $sort = $request->query->get('sort');
+    $direction = $request->query->get('direction');
+
+    $reponseAsses = $entityManager
+        ->getRepository(ReponseAss::class)
+        ->findBy(['typeRepAss' => $typeRepAss], [$sort => $direction]);
+
+    return $this->render('reponse_ass/index.html.twig', [
+        'reponse_asses' => $reponseAsses,
+    ]);
+}
+
 }

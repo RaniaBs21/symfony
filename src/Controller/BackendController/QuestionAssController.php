@@ -84,7 +84,7 @@ class QuestionAssController extends AbstractController
 
         return $this->redirectToRoute('app_question_ass_index', [], Response::HTTP_SEE_OTHER);
     }
-    #[Route('/search', name: 'app_question_ass_search', methods: ['GET', 'POST'])]
+    #[Route('/searchQ', name: 'app_question_ass_search', methods: ['GET', 'POST'])]
     public function search(Request $request, EntityManagerInterface $entityManager): Response
     {
         $typeQAss = $request->query->get('typeQAss');
