@@ -13,6 +13,3 @@ app_reclamation_search:
     path: /searchRec
     controller: App\Controller\BackendController\ReclamationController::search 
     methods: [GET, POST]
-
-
-    
