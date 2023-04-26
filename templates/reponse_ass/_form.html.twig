@@ -1,8 +1,21 @@
-{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_widget(form) }}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}, 'class': 'my-form'}) }}
+    <div class="form-group">
+        {{ form_label(form.typeRepAss, 'Type de Reclamation') }}
+        {{ form_widget(form.typeRepAss, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.typeRepAss) }}
+    </div>
 
-    {# Display validation errors for the 'queRepAss' field #}
-    {{ form_errors(form.queRepAss) }}
+    <div class="form-group">
+        {{ form_label(form.queRepAss, 'Question de la Reclamation') }}
+        {{ form_widget(form.queRepAss, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.queRepAss) }}
+    </div>
 
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="form-group">
+        {{ form_label(form.descriptionRepAss, 'Description de la Reclamation') }}
+        {{ form_widget(form.descriptionRepAss, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.descriptionRepAss) }}
+    </div>
+
+    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
