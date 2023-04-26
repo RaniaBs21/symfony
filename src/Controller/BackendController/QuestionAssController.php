@@ -27,7 +27,40 @@ class QuestionAssController extends AbstractController
             'question_asses' => $questionAsses,
         ]);
     }
+        /**
+ * @Route("/index2", name="app_question_ass_front_index2", methods={"GET"})
+ */
+    public function index2(EntityManagerInterface $entityManager): Response
+    {
+        $questionAsses = $entityManager
+            ->getRepository(QuestionAss::class)
+            ->findAll();
 
+        return $this->render('question_ass/index2.html.twig', [
+            'question_asses' => $questionAsses,
+        ]);
+    }
+    /**
+ * @Route("/new2", name="app_questionass_front_new2", methods={"GET","POST"})
+ */
+    public function new2(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $questionAss = new QuestionAss();
+        $form = $this->createForm(QuestionAssType::class, $questionAss);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($questionAss);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_question_ass_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('question_ass/new2.html.twig', [
+            'question_ass' => $questionAss,
+            'form' => $form,
+        ]);
+    }
     #[Route('/new', name: 'app_question_ass_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
