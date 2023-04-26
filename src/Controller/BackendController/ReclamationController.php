@@ -40,29 +40,7 @@ class ReclamationController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_reclamation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $reclamation = new Reclamation();
-        $form = $this->createForm(ReclamationType::class, $reclamation)
-            ->add('captcha', CaptchaType::class, [
-                'label' => 'Captcha',
-                'invalid_message' => 'Invalid captcha code'
-            ]);
-        $form->handleRequest($request);
-    
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($reclamation);
-            $entityManager->flush();
-    
-            return $this->redirectToRoute('app_reclamation_front_index2', [], Response::HTTP_SEE_OTHER);
-        }
-    
-        return $this->renderForm('reclamation/new.html.twig', [
-            'reclamation' => $reclamation,
-            'form' => $form,
-        ]);
-    }
+
     /**
  * @Route("/new2", name="app_reclamation_front_new2", methods={"GET","POST"})
  */
@@ -100,7 +78,7 @@ public function show2(Reclamation $reclamation): Response
     #[Route('/{idRec}', name: 'app_reclamation_show', methods: ['GET'])]
     public function show(Reclamation $reclamation): Response
     {
-        return $this->render('reclamation/show2.html.twig', [
+        return $this->render('reclamation/show.html.twig', [
             'reclamation' => $reclamation,
         ]);
     }

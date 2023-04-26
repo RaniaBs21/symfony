@@ -6,22 +6,24 @@
     <table class="table">
         <thead>
             <tr>
-                <th>TypeRec</th>
-                <th>DescriptionRec</th>
+                <th>Type des reclamation</th>
+                <th>Description de reclamation</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for reclamation in reclamations %}
-            <tr>
-                <td>{{ reclamation.idRec }}</td>
-                <td>{{ reclamation.typeRec }}</td>
-                <td>{{ reclamation.descriptionRec }}</td>
-                <td>
-                    <a href="{{ path('app_reclamation_show', {'idRec': reclamation.idRec}) }}">show</a>
-                    <a href="{{ path('app_reclamation_edit', {'idRec': reclamation.idRec}) }}">edit</a>
-                </td>
-            </tr>
+    <tr>
+    <td>{{ reclamation.typeRec }}</td>
+    <td>{{ reclamation.descriptionRec }}</td>
+ 
+
+    <td>
+        <a href="{{ path('app_reclamation_show', {'idRec': reclamation.idRec}) }}">show</a>
+    </td>
+
+    </tr>
+
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>
