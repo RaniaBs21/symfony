@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'basefront.html.twig' %}
 
 {% block body %}
     <form method="post" action="{{ path('app_reclamation_delete', {'idRec': reclamation.idRec}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
