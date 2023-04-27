@@ -33,6 +33,13 @@
     </div><!-- End Breadcrumbs -->
 
     <!-- ======= Blog Section ======= -->
+    {#{% for categorie in categories %}
+    {% for region in regions %}
+        <a href="{{ path('filter_evenements', {'region': region, 'categorie': categorie}) }}">
+            Voir les événements pour la région {{ region }} et la catégorie {{ categorie }}
+        </a>
+    {% endfor %}
+    {% endfor %}#}
     {% for type, messages in app.session.flashbag.all() %}
       {% for message in messages %}
           <div class="alert alert-{{ type }}">{{ message }}</div>
@@ -51,7 +58,8 @@
                 <article class="d-flex flex-column">
                   <div class="post-img">
                     {#<img src="{{ path('app_event_image', { 'idEv': evenement.idEv }) }}" alt="" class="img-fluid"/>#}
-                    <img src="{{ asset('/img/img1.png') }}"  alt="" class="img-fluid" /></a>
+                    {#<img src="{{ asset('/img/img1.png') }}"  alt="" class="img-fluid" /></a>#}
+                    <img src="{{ path('evenement_show', {'id': evenement.idEv}) }}"  />
                   </div>
 
                   <h2 class="title">
@@ -91,13 +99,20 @@
             </div><!-- End blog posts list -->
             {% endfor %}
 
-            <div class="blog-pagination">
+            {#<div class="blog-pagination">
               <ul class="justify-content-center">
                 <li><a href="#">1</a></li>
                 <li class="active"><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
               </ul>
-            </div><!-- End blog pagination -->
+            </div><!-- End blog pagination -->#}
+              <!-- Affichage de la pagination -->
+            <div class="blog-pagination">
+            <ul class="justify-content-center">
+                <li>{{ knp_pagination_render(evenements) }}</li>
+              </ul>
+                
+            </div>
 
           </div>
 

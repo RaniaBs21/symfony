@@ -19,6 +19,18 @@
                 <b class="text-muted">Nombres de places à réserver:</b>
                 <p>{{ evenement.nbrePlaces }}</p>
                 #}
+ <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{asset('img/about_the_eif.jpg')}}')">
+    
+      <div class="container position-relative d-flex flex-column align-items-center">
+
+        <h2>Evenement</h2>
+        <ol>
+          <li><a href="{{ path('app_event_front') }}">Home</a></li>
+          <li>Evenement</li>
+        </ol>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
  
 <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
@@ -30,7 +42,7 @@
             <article class="blog-details">
 
               <div class="post-img">
-                <img src="{{ asset('/img/img1.png') }}"  alt="" class="img-fluid" /></a>
+                <img src="{{ path('evenement_show', {'id': evenement.idEv}) }}" alt="" class="img-fluid"  /></a>
               </div>
 
               <h2 class="title"> {{evenement.titreEv }}</h2>
@@ -51,24 +63,6 @@
               </div><!-- End post content -->
             </article><!-- End blog post -->
 
-            <div class="comments">
-
-              <h4 class="comments-count">8 Comments</h4>
-
-              <div id="comment-1" class="comment">
-                <div class="d-flex">
-                  <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt="image"></div>
-                  <div>
-                    <h5><a href="">Nom de celui qui a ommenter</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                    <time datetime="2020-01-01">01 Jan,2022</time>
-                    <p>
-                      contenu commentaire
-                    </p>
-                  </div>
-                </div>
-              </div><!-- End comment #1 -->
-
-            </div><!-- End blog comments -->
 
           </div>      
         </div>

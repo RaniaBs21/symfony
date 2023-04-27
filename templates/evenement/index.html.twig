@@ -1,7 +1,26 @@
 {% extends 'home/base.html.twig' %}
  
 {% block title %}Evenement index{% endblock %}
+{% block header %}
+<!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    
+    <div class="d-flex align-items-center justify-content-between">
+                <a href="{{path ('app_home')}}" class="logo d-flex align-items-center">
+                  <img src="{{asset('img/logo1.png')}}" alt="">
+                  <span class="d-none d-lg-block">ArtPlus</span>
+                </a>
+                <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+    <!-- End Logo -->
 
+    <div class="search-bar">
+              <form class="search-form d-flex align-items-center" method="POST" action="#">
+                <input type="text" class="form-control" id="myInput" placeholder="recherche par categories...">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+              </form>
+    </div>
+{% endblock %}
 {% block body %}
     <div class="container">
             <h2 class="text-center mt-5 mb-3">Les évènements</h2>
@@ -10,7 +29,7 @@
                     <a href="{{ path('app_evenement_new') }}"><img src="{{ asset('/img/plus.png') }}" height="30" width="30" /></a>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="myTable">
                         <tr>
                             <th>Titre</th>
                             <th>Categorie</th>
@@ -46,4 +65,19 @@
             </div>
         </div>    
 {% endblock %}
+{% block js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        console.log("hello");
+    $(document).ready(function () {
 
+    $("#myInput").on("keyup", function () {
+
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function () {
+    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+    });
+    });
+	</script>
+{% endblock %}

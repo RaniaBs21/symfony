@@ -41,7 +41,7 @@
 
 
 <body>
-
+{% block header %}
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
     
@@ -62,13 +62,14 @@
     </div>
     
     <!-- End Search Bar -->
-
+{% endblock %}
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
         <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
+            <input type="text" class="form-control" id="myInput" placeholder="Search categories...">
           </a>
         </li><!-- End Search Icon-->
 
