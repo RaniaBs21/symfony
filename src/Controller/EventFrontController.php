@@ -195,9 +195,14 @@ public function index(EvenementRepository $evenementRepository, PaginatorInterfa
             $em->persist($event);
             $em->flush();
 
-            $mailMessage = 'Bonjour'.' '.$admin->getNomU().' '.$admin->getPrenomU().' '.'Vous êtes inscrit à l\'événement '. ' '.$event->getTitreEv();
+            /*$mailMessage = 'Bonjour'.' '.$admin->getNomU().' '.$admin->getPrenomU().' '.'Vous êtes inscrit à l\'événement '. ' '.$event->getTitreEv();
             
-            $mailer->sendEmail($mailMessage);
+            $mailer->sendEmail($mailMessage);*/
+            $mailSubject = 'Confirmation d\'inscription';
+            $mailBody = 'Bonjour '.$admin->getNomU().' '.$admin->getPrenomU().',<br><br>Vous êtes inscrit à l\'événement "'.$event->getTitreEv().'".<br><br>Cordialement,<br>L\'équipe de gestion des événements.';
+            $recipientEmail = 'rahmaaslimii83@gmail.tn';
+
+            $mailer->sendEmail($recipientEmail, $mailSubject, $mailBody);
             $this->addFlash('success', 'Vous êtes inscrit à l\'événement '.$event->getTitreEv());
         }
         
