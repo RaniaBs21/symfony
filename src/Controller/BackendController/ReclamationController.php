@@ -191,7 +191,6 @@ public function search2(Request $request, EntityManagerInterface $entityManager)
     $typeRec = $request->query->get('typeRec');
     $sort = $request->query->get('sort');
     $direction = $request->query->get('direction');
-
     $reclamations = $entityManager
         ->getRepository(Reclamation::class)
         ->findBy(['typeRec' => $typeRec], [$sort => $direction]);
