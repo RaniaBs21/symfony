@@ -1,0 +1,52 @@
+<html>
+<head>
+    <style>
+        /* Add some styles to make the PDF look nice */
+        body {
+            font-family: Garamond;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Voici</h1>
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reponse_ass.idRepAss }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ reponse_ass.typeRepAss }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ reponse_ass.descriptionRepAss}}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -5,10 +5,13 @@ namespace App\Controller\BackendController;
 use App\Entity\QuestionAss;
 use App\Form\QuestionAssType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mime\Address;
 
 #[Route('/question/ass')]
 class QuestionAssController extends AbstractController
@@ -62,7 +65,7 @@ class QuestionAssController extends AbstractController
         ]);
     }
     #[Route('/new', name: 'app_question_ass_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $questionAss = new QuestionAss();
         $form = $this->createForm(QuestionAssType::class, $questionAss);
@@ -72,6 +75,14 @@ class QuestionAssController extends AbstractController
             $entityManager->persist($questionAss);
             $entityManager->flush();
 
+            $e =(new TemplatedEmail())
+               ->from(new Address('diabety.tn@gmail.com','No Reply'))
+               ->to('h@gmail.com')
+               ->subject('aaaaa')
+               ->htmlTemplate('question_ass/email.html.twig');
+               
+var_dump($e);
+               $mailer->send($e);
             return $this->redirectToRoute('app_question_ass_index', [], Response::HTTP_SEE_OTHER);
         }
 

@@ -9,10 +9,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
+use App\Service\PdfService;
 
 #[Route('/reponse/ass')]
 class ReponseAssController extends AbstractController
 {
+
+
+    private $pdfService;
+
+    public function __construct(PdfService $pdfService)
+    {
+        $this->pdfService = $pdfService;
+    }
+
     #[Route('/', name: 'app_reponse_ass_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -26,7 +40,7 @@ class ReponseAssController extends AbstractController
     }
 
     #[Route('/new', name: 'app_reponse_ass_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function ReponseAss(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $reponseAss = new ReponseAss();
         $form = $this->createForm(ReponseAssType::class, $reponseAss);
@@ -35,6 +49,17 @@ class ReponseAssController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($reponseAss);
             $entityManager->flush();
+
+            // Generate PDF
+            $html = $this->renderView('reponse_ass/show2.html.twig', [
+                'reponse_ass' => $reponseAss,
+            ]);
+
+            // Download PDF
+            $this->pdfService->showPdfFile($html);
+
+            // Or generate binary PDF
+            // $binaryPdf = $this->pdfService->generateBinaryPDF($html);
 
             return $this->redirectToRoute('app_reponse_ass_index', [], Response::HTTP_SEE_OTHER);
         }

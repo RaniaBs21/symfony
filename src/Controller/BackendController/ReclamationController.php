@@ -15,6 +15,8 @@ use Gregwar\CaptchaBundle\Type\CaptchaType;
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
 {
+    
+
     #[Route('/', name: 'app_reclamation_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -40,7 +42,29 @@ class ReclamationController extends AbstractController
         ]);
     }
 
-
+        #[Route('/new', name: 'app_reclamation_new', methods: ['GET', 'POST'])]
+        public function new(Request $request, EntityManagerInterface $entityManager): Response
+        {
+            $reclamation = new Reclamation();
+            $form = $this->createForm(ReclamationType::class, $reclamation)
+                ->add('captcha', CaptchaType::class, [
+                    'label' => 'Captcha',
+                    'invalid_message' => 'Invalid captcha code'
+                ]);
+            $form->handleRequest($request);
+        
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($reclamation);
+                $entityManager->flush();
+        
+                return $this->redirectToRoute('app_reclamation_front_index2', [], Response::HTTP_SEE_OTHER);
+            }
+        
+            return $this->renderForm('reclamation/new.html.twig', [
+                'reclamation' => $reclamation,
+                'form' => $form,
+            ]);
+        }
     /**
  * @Route("/new2", name="app_reclamation_front_new2", methods={"GET","POST"})
  */
