@@ -175,15 +175,21 @@ public function search(Request $request, EntityManagerInterface $entityManager):
     $sort = $request->query->get('sort');
     $direction = $request->query->get('direction');
 
-    $reclamations = $entityManager
-        ->getRepository(Reclamation::class)
-        ->findBy(['typeRec' => $typeRec], [$sort => $direction]);
+    if (!$typeRec && in_array($sort, ['idRec', 'typeRec', 'descriptionRec'])) {
+        $reclamations = $entityManager
+            ->getRepository(Reclamation::class)
+            ->findBy([], [$sort => $direction]);
+    } else {
+        $reclamations = $entityManager
+            ->getRepository(Reclamation::class)
+            ->findBy(['typeRec' => $typeRec], [$sort => $direction]);
+    }
 
     return $this->render('reclamation/index.html.twig', [
         'reclamations' => $reclamations,
     ]);
 }
-    /**
+/**
  * @Route("/search2", name="app_reclamation_front_search2", methods={"GET","POST"})
  */
 public function search2(Request $request, EntityManagerInterface $entityManager): Response
@@ -191,9 +197,16 @@ public function search2(Request $request, EntityManagerInterface $entityManager)
     $typeRec = $request->query->get('typeRec');
     $sort = $request->query->get('sort');
     $direction = $request->query->get('direction');
-    $reclamations = $entityManager
-        ->getRepository(Reclamation::class)
-        ->findBy(['typeRec' => $typeRec], [$sort => $direction]);
+
+    if (!$typeRec && in_array($sort, ['idRec', 'typeRec', 'descriptionRec'])) {
+        $reclamations = $entityManager
+            ->getRepository(Reclamation::class)
+            ->findBy([], [$sort => $direction]);
+    } else {
+        $reclamations = $entityManager
+            ->getRepository(Reclamation::class)
+            ->findBy(['typeRec' => $typeRec], [$sort => $direction]);
+    }
 
     return $this->render('reclamation/index2.html.twig', [
         'reclamations' => $reclamations,
