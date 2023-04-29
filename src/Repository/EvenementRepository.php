@@ -44,7 +44,14 @@ class EvenementRepository extends ServiceEntityRepository
            ->setParameter('titre', '%'.$titre.'%')
            ->getQuery()
            ->getResult();
-        }
+    }
+    public function findSEventByid($id){
+        return $this->createQueryBuilder("e")
+        ->where('e.idEv LIKE :id')
+        ->setParameter('id', '%'.$id.'%')
+        ->getQuery()
+        ->getOneOrNullResult();
+    }
 
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects

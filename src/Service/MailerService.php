@@ -7,27 +7,36 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
 class MailerService
-{
-    private $replyTo;
+{   /*private $mailer;
+    public function __construct(MailerInterface $mailer) {
+        $this->mailer = $mailer;
+    }
+
+    public function sendEmail($to, $content, $subject)
+    {   
+        $email = (new Email())
+            ->from('rahma.test.esprit@gmail.com')
+            ->to($to)
+            ->subject($subject)
+            ->html($content);
+        
+        return $this->mailer->send($email);
+        
+    }*/  
     public function __construct(private MailerInterface $mailer) {}
     public function sendEmail(
-        $to = 'rahma.slimi@esprit.tn',
-        $content = '<p>Vous étes inscrit à l"événement avec succés</p>',
-        $subject = 'Participation à l\'évenement!'
+        $to = 'rahmaaslimii83@gmail.com',
+        $content = '<p>Vous êtes inscrit à l\'événement avec succès</p>',
+        $subject = 'Participation à l\'événement!'
     ): void
     {   
         $email = (new Email())
-            ->from('rahmaaslimii83@gmail.com')
+            ->from('rahma.test.esprit@gmail.com')
             ->to($to)
-            //->cc('cc@example.com')
-            //->bcc('bcc@example.com')
-            //->replyTo($this->replyTo)
-            //->priority(Email::PRIORITY_HIGH)
             ->subject($subject)
-//            ->text('Sending emails is fun again!')
             ->html($content);
-            
-        // ...
+    
         $this->mailer->send($email);
     }
+    
 }

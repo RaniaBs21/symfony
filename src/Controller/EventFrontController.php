@@ -15,24 +15,10 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface ;
+use Symfony\Component\HttpFoundation\JsonResponse;
 class EventFrontController extends AbstractController
 {
-    /*#[Route('/event/front', name: 'app_event_front')]
-    public function index(EvenementRepository $evenementRepository,PaginatorInterface $paginator): Response
-    {
-        $evenements = $evenementRepository->findAll();
-        // Paginer la liste des evenements
-        $EvPaginated = $paginator->paginate(
-            $evenements,
-            $request->query->getInt('page', 1),
-            4 // Nombre d'éléments par page
-        );
-
-        return $this->render('event_front/index.html.twig', [
-            'evenements' => $EvPaginated,
-        ]);
-        
-    }*/
+    
     #[Route('/event/front', name: 'app_event_front')]
 public function index(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
 {
@@ -47,30 +33,8 @@ public function index(EvenementRepository $evenementRepository, PaginatorInterfa
     return $this->render('event_front/index.html.twig', [
         'evenements' => $EvPaginated,
     ]);
+    
 }
-    /*
-    #[Route('/event/front', name: 'app_event_front')]
-    public function index(EvenementRepository $evenementRepository, EntityManagerInterface $entityManager): Response
-    {
-        // Récupérer les événements avec les données de la relation "Participer"
-        $evenements = $evenementRepository->createQueryBuilder('e')
-            ->leftJoin(Participer::class, 'p', 'WITH', 'p.idEv = e.idEv')
-            ->getQuery()
-            ->getResult();
-           // Récupérer les événements avec les données de la relation "Participer"
-        $evenements = $entityManager->createQueryBuilder()
-        ->select('e, p')
-        ->from(Evenement::class, 'e')
-        ->leftJoin(Participer::class, 'p', 'WITH', 'p.idEv = e.idEv')
-        ->getQuery()
-        ->getResult();
-
-        return $this->render('event_front/index.html.twig', [
-            'evenements' => $evenements,
-        ]);
-        
-
-    } */
 
 
     #[Route('/{idEv}', name: 'app_event_show', methods: ['GET'])]
@@ -80,93 +44,22 @@ public function index(EvenementRepository $evenementRepository, PaginatorInterfa
             'evenement' => $evenement,
         ]);
     }
-    /*
-    #[Route('/event/front/{idEv}/image', name: 'app_event_image', methods: ['GET'])]   
-    public function displayImageAction($idEv)
-    {
-        $event = $this->getDoctrine()->getRepository(Evenement::class)->find($idEv);
-
-        if (!$event) {
-            throw $this->createNotFoundException('Event not found');
-        }
-
-        $imageData = $event->getImageEv();
-
-        $response = new BinaryFileResponse(stream_get_contents($imageData));
-        $response->headers->set('Content-Type', 'image/png');
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE);
-
-        return $response;
-    }*/
-    /**
-    * @Route("/event/front/{idEv}/participate", name="app_event_participate")
-    */
-    /*public function participateAction(Request $request, $idEv, MailerService $mailer)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $event = $em->getRepository(Evenement::class)->find($idEv);
-        $idUt = 2; // ID de l'objet Admin à récupérer
-        $adminRepository = $em->getRepository(Admin::class);
-        $admin = $adminRepository->find($idUt);
-        $participation = $em->getRepository(Participation::class)->findBy([
-            //'idU' => $this->getUser(),
-            'idU' => $admin,
-            'idEv' => $event,
-            ]);
-        
-        if (!$event) {
-            throw $this->createNotFoundException('Event not found');
-        } elseif($participation) {
-            $this->addFlash('warning', 'Vous participez déjà à cet événement.');
-            //return $this->redirectToRoute('app_event_show', ['idEv' => $idEv]);
-        } else{
-
-
-        /*$idUt = 2; // ID de l'objet Admin à récupérer
-        $adminRepository = $entityManager->getRepository(Admin::class);
-        $admin = $adminRepository->find($idUt);
-
-        $participation = new Participation();
-        $participation->setIdU($admin);
-        $participation->setIdEv($event);
-        $participation->setDateParticipation(new \DateTime());
-
-        $event->setNbrePlaces($event->getNbrePlaces() - 1);
-
-        $entityManager->persist($participation);
-        $entityManager->persist($event);
-        $entityManager->flush();*/
-
-    /*    $participation = new Participation();
-        $participation->setIdU($admin);
-        //$participation->setIdU($this->getUser());
-        $participation->setIdEv($event);
-        $participation->setDateParticipation(new \DateTime());
-
-        $event->setNbrePlaces($event->getNbrePlaces() - 1);
-
-        $em->persist($participation);
-        $em->persist($event);
-        $em->flush();
-
-        /*$em->persist($participation);
-        $em->flush();*/
-    /*    $mailMessage = 'Bonjour'.' '.$admin->getNomU().' '.$admin->getPrenomU().' '.'Vous êtes inscrit à l\'événement '. ' '.$event->getTitreEv();
-        $mailer->sendEmail(content: $mailMessage);
-        $this->addFlash('success', 'Vous êtes inscrit à l\'événement '.$event->getTitreEv());
-        
-        //return $this->redirectToRoute('app_event_front');
-        }
-        return $this->redirectToRoute('app_event_front');
-    }
-    */
+    
 
     /**
  * @Route("/event/front/{idEv}/participate", name="app_event_participate")
  */
     public function participateAction(Request $request, $idEv, MailerService $mailer)
     {
+        /*var_dump($mailer->sendEmail("khaled.slimi1@gmail.com", "test ", "test body"));die;
+        try {
+            $mailer->sendEmail("khaled.slimi1@gmail.com", "test ", "test body");
+        } catch (Exception $e) {
+            var_dump($e->getMessage());die;
+        }
+        
+
+        die('test');*/
         $em = $this->getDoctrine()->getManager();
 
         $event = $em->getRepository(Evenement::class)->find($idEv);
@@ -198,12 +91,14 @@ public function index(EvenementRepository $evenementRepository, PaginatorInterfa
             /*$mailMessage = 'Bonjour'.' '.$admin->getNomU().' '.$admin->getPrenomU().' '.'Vous êtes inscrit à l\'événement '. ' '.$event->getTitreEv();
             
             $mailer->sendEmail($mailMessage);*/
-            $mailSubject = 'Confirmation d\'inscription';
-            $mailBody = 'Bonjour '.$admin->getNomU().' '.$admin->getPrenomU().',<br><br>Vous êtes inscrit à l\'événement "'.$event->getTitreEv().'".<br><br>Cordialement,<br>L\'équipe de gestion des événements.';
-            $recipientEmail = 'rahmaaslimii83@gmail.tn';
+            $subject = 'Confirmation d\'inscription';
+            $content = 'Bonjour '.$admin->getNomU().' '.$admin->getPrenomU().',<br><br>Vous êtes inscrit à l\'événement "'.$event->getTitreEv().'".<br><br>Cordialement,<br>L\'équipe de gestion des événements.';
+            $to = 'rahmaaslimii83@gmail.tn';
+            
+            $mailer->sendEmail($to, $subject, $content);
+            //$mailer->sendEmail("khaled.slimi1@gmail.com", "test ", "test body");
 
-            $mailer->sendEmail($recipientEmail, $mailSubject, $mailBody);
-            $this->addFlash('success', 'Vous êtes inscrit à l\'événement '.$event->getTitreEv());
+            $this->addFlash('success', 'Vous êtes inscrit à l\'événement '.$event->getTitreEv().' avec succés! Veuillez consulter votre mail!');
         }
         
         return $this->redirectToRoute('app_event_front');
@@ -239,5 +134,28 @@ public function index(EvenementRepository $evenementRepository, PaginatorInterfa
             'evenement' => $evenement,
         ]);
     }
+    /**
+ * @Route("/tri-evenements", name="tri_evenements", methods={"POST"})
+ */
+public function triEvenements(Request $request, EvenementRepository $evenementRepository)
+{
+    // Récupération du critère de tri depuis la requête Ajax
+    $tri = $request->request->get('tri');
+
+    // Récupération de la liste des événements triée depuis la base de données
+
+    if ($tri == 'titre') {
+        // Si le critère de tri est "titre", on trie les événements par leur titre en ordre croissant
+        $evenements = $evenementRepository->findBy([], ['titreEv' => 'ASC']);
+    } else {
+        // Sinon, on trie les événements par leur date en ordre croissant
+        $evenements = $evenementRepository->findBy([], ['dateEv' => 'ASC']);
+    }
+    // Rendu d'une vue Twig contenant la liste d'événements triée
+    return $this->render('event_front/index.html.twig', [
+        'evenements' => $evenements,
+        'tri' => $tri
+    ]);
+}
  
 }

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[Route('/evenement')]
 class EvenementController extends AbstractController
@@ -33,10 +34,14 @@ class EvenementController extends AbstractController
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
-        //dd($this->getUser());
+
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            //$evenement->setIdG($this->getUser());
+            $imageFile = $form->get('imageEv')->getData();
+            if ($imageFile instanceof UploadedFile) {
+                $blob = file_get_contents($imageFile->getPathname());
+                $evenement->setImageEv($blob);
+            }
+
             $entityManager->persist($evenement);
             $entityManager->flush();
 
@@ -64,6 +69,12 @@ class EvenementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('imageEv')->getData();
+            if ($imageFile instanceof UploadedFile) {
+                $blob = file_get_contents($imageFile->getPathname());
+                $evenement->setImageEv($blob);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);

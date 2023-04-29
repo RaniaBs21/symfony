@@ -413,6 +413,22 @@
 
   <!-- Vendor JS Files -->
   {% block js %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#select-tri').change(function() {
+            var tri = $(this).val();
+            $.ajax({
+                url: "{{ path('tri_evenements') }}",
+                method: "POST",
+                data: {tri: tri},
+                success: function(data) {
+                $('#liste-evenements').html(data); // Remplacement de la liste des événements triée
+                }
+            });
+            });
+        });
+    </script>
   <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('vendor/aos/aos.js')}}"></script>
   <script src="{{asset('vendor/glightbox/js/glightbox.min.js')}}"></script>
