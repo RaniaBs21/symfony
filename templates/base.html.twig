@@ -495,9 +495,10 @@
     <li class="nav-item">
 
      
-        <li><a class="nav-link collapsed" href="{{path ('produit')}}"></li>
+        <a class="nav-link collapsed" href="{{path ('produit')}}">
          <i class="bi bi-question-circle"></i>
          <span>Produits</span>
+         </a>
     </li>
      
      <li class="nav-item">
@@ -508,13 +509,18 @@
       </li> 
 <div class="nav-item">
 
-<a href="#">Assistance</a>
+
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{path ('assistance')}}">
+        <a class="nav-link collapsed" href="{{path ('app_reclamation_index')}}">
           <i class="bi bi-envelope"></i>
           <span>Assistance</span>
         </a>
       </li><!-- End Contact Page Nav -->
+<a href="{{path ('app_reclamation_index')}}">Reclamation</a><br>
+<a href="{{path ('app_question_ass_index')}}">Questions</a><br>
+<a href="{{path ('app_reponse_ass_index')}}">Reponses</a>
+
+
 </div>
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{path ('register')}}">

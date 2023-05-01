@@ -77,33 +77,41 @@
     </head>
     <body>
         {% block body %}
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>VOICI LE REPONSE A VOTRE QUESTION!</h1>
-                        <table class="table">
-                        <tbody>
-                            <tr>
-                                <th>Votre Id</th>
-                                <td>{{ reponse_ass.idRepAss }}</td>
-                            </tr>
-                            <tr>
-                                <th>Le Type de votre Reponse</th>
-                                <td>{{ reponse_ass.typeRepAss }}</td>
-                            </tr>
-                            <tr>
-                                <th>La Question correspondante</th>
-                                <td>{{ reponse_ass.queRepAss }}</td>
-                            </tr>
-                            <tr>
-                                <th>La Description Reponse</th>
-                                <td>{{ reponse_ass.descriptionRepAss }}</td>
-                            </tr>
-                        </tbody>
-                        <tr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>VOICI LE REPONSE A VOTRE QUESTION!</h1>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Votre Id</th>
+                        <td>{{ reponse_ass.idRepAss }}</td>
+                    </tr>
+                    <tr>
+                        <th>Le Type de votre Reponse</th>
+                        <td>{{ reponse_ass.typeRepAss }}</td>
+                    </tr>
+                    <tr>
+                        <th>La Question correspondante</th>
+                        <td>{{ reponse_ass.queRepAss }}</td>
+                    </tr>
+                    <tr>
+                        <th>La Description Reponse</th>
+                        <td>{{ reponse_ass.descriptionRepAss }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table class="table">
+                <tbody>
+                    <tr>
                         <th>Merci pour votre Confiance! , Je te souhaite une bonne journée Artplus support team</th>
-                        </tr>
-                    </table>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
                     <div class="page-break"></div>
                     {{ include('reponse_ass/_delete_form.html.twig') }}
